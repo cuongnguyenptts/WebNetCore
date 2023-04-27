@@ -15,10 +15,20 @@ namespace WebSellWatch.Controllers
             _context = context;
         }
 
-        // GET: Admin/AdminTinDangs
+        // GET: Blog/Ìndex
+        [Route("blog.html", Name = "Blog")]
         public IActionResult Index(int? page)
         {
-
+            var collection = _context.TinDangs.AsNoTracking().ToList();
+            foreach (var item in collection)
+            {
+                if (item.CreatedDate == null)
+                {
+                    item.CreatedDate = DateTime.Now;
+                    _context.Update(item);
+                    _context.SaveChanges();
+                }
+            }
             var pageNumber = page == null || page <= 0 ? 1 : page.Value;
             var pageSize = 10;
             var lsTinDangs = _context.TinDangs
@@ -30,6 +40,7 @@ namespace WebSellWatch.Controllers
             return View(models);
         }
 
+        [Route("/tintuc/{Alias}-{id}.html", Name = "TinDeltails")]
         public  IActionResult Details(int id)
         {
             var tinDang =  _context.TinDangs.AsNoTracking()

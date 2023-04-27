@@ -1,10 +1,11 @@
-﻿@model IEnumerable<WebSellWatch.Models.Product>
+﻿@model WebSellWatch.Models.Product
+
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = Model.Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Product> lsProduct = ViewBag.SanPham;
 }
 
-<!--breadcrumbs area start-->
 <div class="breadcrumbs_area breadcrumbs_product" style="margin-top: 170px">
     <div class="container">
         <div class="row">
@@ -13,7 +14,7 @@
                     <ul>
                         <li><a href="index.html">home</a></li>
                         <li><a href="shop.html">shop</a></li>
-                        <li>Product Example</li>
+                        <li>@Model.Title</li>
                     </ul>
                 </div>
             </div>
@@ -28,40 +29,34 @@
             <div class="col-lg-6 col-md-6">
                 <div class="product_zoom_gallery">
                     <div class="zoom_gallery_inner d-flex">
-                        <div class="zoom_tab_img">
-                            <a class="zoom_tabimg_list" href="javascript:void(0)"><img src="~/assets/img/product/small-product/product1.png" alt="tab-thumb"></a>
-                            <a class="zoom_tabimg_list" href="javascript:void(0)"><img src="~/assets/img/product/small-product/product2.png" alt="tab-thumb"></a>
-                            <a class="zoom_tabimg_list" href="javascript:void(0)"><img src="~/assets/img/product/small-product/product3.png" alt="tab-thumb"></a>
-                            <a class="zoom_tabimg_list" href="javascript:void(0)"><img src="~/assets/img/product/small-product/product4.png" alt="tab-thumb"></a>
-                            <a class="zoom_tabimg_list" href="javascript:void(0)"><img src="~/assets/img/product/small-product/product1.png" alt="tab-thumb"></a>
-                            <a class="zoom_tabimg_list" href="javascript:void(0)"><img src="~/assets/img/product/small-product/product2.png" alt="tab-thumb"></a>
-                            <a class="zoom_tabimg_list" href="javascript:void(0)"><img src="~/assets/img/product/small-product/product3.png" alt="tab-thumb"></a>
-                            <a class="zoom_tabimg_list" href="javascript:void(0)"><img src="~/assets/img/product/small-product/product4.png" alt="tab-thumb"></a>
+                        <div class="zoom_tab_img" style="height:100px; width:100px">
+                            <a class="zoom_tabimg_list" href="javascript:void(0)"><img src="~/images/products/@Model.Thumb" alt="tab-thumb"></a>
+                            <a class="zoom_tabimg_list" href="javascript:void(0)"><img src="~/images/products/@Model.Thumb" alt="tab-thumb"></a>
+                            <a class="zoom_tabimg_list" href="javascript:void(0)"><img src="~/images/products/@Model.Thumb" alt="tab-thumb"></a>
+                            <a class="zoom_tabimg_list" href="javascript:void(0)"><img src="~/images/products/@Model.Thumb" alt="tab-thumb"></a>
+                             <a class="zoom_tabimg_list" href="javascript:void(0)"><img src="~/images/products/@Model.Thumb" alt="tab-thumb"></a>
                         </div>
                         <div class="product_zoom_main_img">
                             <div class="product_zoom_thumb">
-                                <img data-image="~/assets/img/product/big-product/product1.png" src="~/assets/img/product/big-product/product1.png" alt="">
+                                <img style="height:550px; width:100%" data-image="~/images/products/@Model.Thumb" src="~/images/products/@Model.Thumb" alt="">
                             </div>
                             <div class="product_zoom_thumb">
-                                <img data-image="~/assets/img/product/big-product/product1.png" src="~/assets/img/product/big-product/product1.png" alt="">
+                                <img style="height:550px" data-image="~/images/products/@Model.Thumb" src="~/images/products/@Model.Thumb" alt="">
                             </div>
                             <div class="product_zoom_thumb">
-                                <img data-image="~/assets/img/product/big-product/product1.png" src="~/assets/img/product/big-product/product1.png" alt="">
+                                <img style="height:550px" data-image="~/images/products/@Model.Thumb" src="~/images/products/@Model.Thumb" alt="">
                             </div>
                             <div class="product_zoom_thumb">
-                                <img data-image="~/assets/img/product/big-product/product1.png" src="~/assets/img/product/big-product/product1.png" alt="">
+                                <img style="height:550px" data-image="~/images/products/@Model.Thumb" src="~/images/products/@Model.Thumb" alt="">
                             </div>
                             <div class="product_zoom_thumb">
-                                <img data-image="~/assets/img/product/big-product/product1.png" src="~/assets/img/product/big-product/product1.png" alt="">
+                                <img style="height:550px" data-image="~/images/products/@Model.Thumb" src="~/images/products/@Model.Thumb" alt="">
                             </div>
                             <div class="product_zoom_thumb">
-                                <img data-image="~/assets/img/product/big-product/product1.png" src="~/assets/img/product/big-product/product1.png" alt="">
+                                <img style="height:550px" data-image="~/images/products/@Model.Thumb" src="~/images/products/@Model.Thumb" alt="">
                             </div>
                             <div class="product_zoom_thumb">
-                                <img data-image="~/assets/img/product/big-product/product1.png" src="~/assets/img/product/big-product/product1.png" alt="">
-                            </div>
-                            <div class="product_zoom_thumb">
-                                <img data-image="~/assets/img/product/big-product/product1.png" src="~/assets/img/product/big-product/product1.png" alt="">
+                                <img style="height:550px" data-image="~/images/products/@Model.Thumb" src="~/images/products/@Model.Thumb" alt="">
                             </div>
                         </div>
                     </div>
@@ -70,7 +65,7 @@
             <div class="col-lg-6 col-md-6">
                 <div class="product_d_right">
                     <form action="#">
-                        <h1>Edwin T-Shirt Logo Script Print in Navy</h1>
+                        <h1>@Model.ProductName</h1>
                         <div class="product_ratting_review d-flex align-items-center">
                             <div class=" product_ratting">
                                 <ul class="d-flex">
@@ -84,21 +79,37 @@
                             <div class="product_review">
                                 <ul class="d-flex">
                                     <li>4 reviews</li>
-                                    <li>Write your review</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="price_box">
-                            <span class="current_price">$39.00</span>
+                            <span class="current_price">@Model.Price.Value.ToString("#,##0") VNĐ</span>
                         </div>
                         <div class="product_availalbe">
                             <ul class="d-flex">
-                                <li><i class="icon-layers icons"></i> Only <span>15</span> left </li>
-                                <li>Availalbe: <span class="stock">In Stock</span></li>
+                                <li>
+                                    Availalbe:                                     
+                                    <span class="stock">
+                                        @if (Model.UnitsInStock.Value > 0)
+                                        {
+                                            <div class="d-flex align-items-center" style="text-align:center">
+                                                <div class="badge badge-success badge-dot m-r-10"></div>
+                                                <div>In Stock</div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="d-flex align-items-center">
+                                                <div class="badge badge-danger badge-dot m-r-10"></div>
+                                                <div>Out Stock</div>
+                                            </div>
+                                        }
+                                    </span>
+                                </li>
                             </ul>
                         </div>
                         <div class="product_desc">
-                            <p>A t-shirt that comes in three colors (red, white and blue) and three sizes (small, medium, large) is a configurable product.  </p>
+                            <p>@Model.ShortDesc </p>
                         </div>
                         <div class="product_variant">
                             <div class="filter__list widget_color d-flex align-items-center">
@@ -188,19 +199,10 @@
                     <div class="product_info_button border-bottom">
                         <ul class="nav" role="tablist">
                             <li>
-                                <a class="active" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="false">Product Description</a>
+                                <a class="active" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="false">Mô tả sản phẩm</a>
                             </li>
                             <li>
-                                <a data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Reviews          </a>
-                            </li>
-                            <li>
-                                <a data-toggle="tab" href="#tags" role="tab" aria-controls="tags" aria-selected="false">Tags </a>
-                            </li>
-                            <li>
-                                <a data-toggle="tab" href="#additional" role="tab" aria-controls="additional" aria-selected="false">Additional Information </a>
-                            </li>
-                            <li>
-                                <a data-toggle="tab" href="#tabinfo" role="tab" aria-controls="tabinfo" aria-selected="false">Custom Tab Info  </a>
+                                <a data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Bình luận</a>
                             </li>
                             <li>
                                 <a data-toggle="tab" href="#video" role="tab" aria-controls="video" aria-selected="false">Custom Tab Video </a>
@@ -211,15 +213,7 @@
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="info" role="tabpanel">
                             <div class="product_info_content">
-                                <p>Coupling a blended linen construction with tailored style, the River Island HR Jasper Blazer will imprint a touch of dapper charm into your after-dark wardrobe. <br> Our model wearing a size medium blazer, and usually takes a size medium/38L shirt. <br> He is 6’2 1/2” (189cm) tall with a 38” (96 cm) chest and a 31” (78 cm) waist.</p>
-                                <ul>
-                                    <li>Length: 74cm</li>
-                                    <li>Regular fit</li>
-                                    <li>Notched lapels</li>
-                                    <li>Twin button front fastening</li>
-                                    <li>Front patch pockets; chest pocket</li>
-                                    <li> Internal pockets</li>
-                                </ul>
+                                <p>@Model.Description</p>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="reviews" role="tabpanel">
@@ -267,83 +261,17 @@
                                                 <label for="review_comment">Your review </label>
                                                 <textarea name="comment" id="review_comment"></textarea>
                                             </div>
-                                            <div class="col-lg-6 col-md-6">
-                                                <label for="author">Name</label>
-                                                <input id="author" type="text">
-
-                                            </div>
-                                            <div class="col-lg-6 col-md-6">
-                                                <label for="email">Email </label>
-                                                <input id="email" type="text">
-                                            </div>
                                         </div>
-                                        <button type="submit">Submit</button>
+                                        <button type="submit">Gửi</button>
                                     </form>
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="tags" role="tabpanel">
+@*                        <div class="tab-pane fade" id="tags" role="tabpanel">
                             <div class="product_info_content">
-                                <ul>
-                                    <li>Length: 74cm</li>
-                                    <li>Regular fit</li>
-                                    <li>Notched lapels</li>
-                                    <li>Twin button front fastening</li>
-                                    <li>Front patch pockets; chest pocket</li>
-                                    <li> Internal pockets</li>
-                                </ul>
+                                <p>@Html.Raw(Model.Description)</p>
                             </div>
-                        </div>
-                        <div class="tab-pane fade" id="additional" role="tabpanel">
-                            <div class="product_d_table">
-                                <form action="#">
-                                    <table>
-                                        <tbody>
-                                            <tr>
-                                                <td class="first_child">Compositions</td>
-                                                <td>Polyester</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="first_child">Styles</td>
-                                                <td>Girly</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="first_child">Properties</td>
-                                                <td>Short Dress</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </form>
-                            </div>
-                            <div class="product_info_content">
-                                <p>Fashion has been creating well-designed collections since 2010. The brand offers feminine designs delivering stylish separates and statement dresses which have since evolved into a full ready-to-wear collection in which every item is a vital part of a woman's wardrobe. The result? Cool, easy, chic looks with youthful elegance and unmistakable signature style. All the beautiful pieces are made in Italy and manufactured with the greatest attention. Now Fashion extends to a range of accessories including shoes, hats, belts and more!</p>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="tabinfo" role="tabpanel">
-                            <div class="product_d_table">
-                                <form action="#">
-                                    <table>
-                                        <tbody>
-                                            <tr>
-                                                <td class="first_child">Compositions</td>
-                                                <td>Polyester</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="first_child">Styles</td>
-                                                <td>Girly</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="first_child">Properties</td>
-                                                <td>Short Dress</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </form>
-                            </div>
-                            <div class="product_info_content">
-                                <p>Fashion has been creating well-designed collections since 2010. The brand offers feminine designs delivering stylish separates and statement dresses which have since evolved into a full ready-to-wear collection in which every item is a vital part of a woman's wardrobe. The result? Cool, easy, chic looks with youthful elegance and unmistakable signature style. All the beautiful pieces are made in Italy and manufactured with the greatest attention. Now Fashion extends to a range of accessories including shoes, hats, belts and more!</p>
-                            </div>
-                        </div>
+                        </div>*@
                         <div class="tab-pane fade" id="video" role="tabpanel">
                             <div class="product_tab_vidio text-center">
                                 <iframe width="729" height="410" src="https://www.youtube.com/embed/BUWzX78Ye_8" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -363,7 +291,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="section_title mb-50">
-                    <h2>Related Products</h2>
+                    <h2>Sản phẩm tương tư</h2>
                 </div>
             </div>
         </div>
@@ -382,284 +310,63 @@
                       {"breakpoint":300, "settings": { "slidesToShow": 1 } }
                      ]
                 }'>
-                <div class="col-lg-3">
-                    <article class="single_product">
-                        <figure>
-                            <div class="product_thumb">
-                                <a href="product-details.html">
-                                    <img class="primary_img" src="~/assets/img/product/product1.jpg" alt="consectetur">
-                                </a>
-                                <div class="product_action">
-                                    <ul>
-                                        <li class="wishlist">
-                                            <a href="#" data-tippy="Wishlist" data-tippy-inertia="true" data-tippy-delay="50"
-                                               data-tippy-arrow="true" data-tippy-placement="left"><i class="icon-heart icons"></i></a>
-                                        </li>
+                @if (lsProduct != null)
+                {
+                    foreach (var item in lsProduct)
+                    {
+                        string url = $"";
+                        <div class="col-lg-3">
+                            <article class="single_product">
+                                <figure>
+                                    <div class="product_thumb">
+                                        <a href="@url">
+                                            <img class="primary_img" src="~/images/products/@item.Thumb" alt="@item.Title">
+                                        </a>
+                                        <div class="product_action">
+                                            <ul>
+                                                <li class="wishlist">
+                                                    <a href="#" data-tippy="Wishlist" data-tippy-inertia="true" data-tippy-delay="50"
+                                                       data-tippy-arrow="true" data-tippy-placement="left"><i class="icon-heart icons"></i></a>
+                                                </li>
 
-                                        <li class="quick_view"><a data-toggle="modal" data-target="#modal_box" data-tippy="Quick View" href="#" data-tippy-inertia="true" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-placement="left"><i class="icon-size-fullscreen icons"></i></a></li>
-                                        <li class="compare">
-                                            <a data-tippy="Compare" href="#" data-tippy-inertia="true" data-tippy-delay="50"
-                                               data-tippy-arrow="true" data-tippy-placement="left"><i class="icon-refresh icons"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <figcaption class="product_content text-center">
-                                <div class="product_ratting">
-                                    <ul class="d-flex justify-content-center">
-                                        <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                        <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                        <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                        <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                        <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                        <li><span>(4)</span></li>
-                                    </ul>
-                                </div>
-                                <h4 class="product_name"><a href="product-details.html">Basic Joggin Shorts</a></h4>
-                                <div class="price_box">
-                                    <span class="current_price">$26.00</span>
-                                    <span class="old_price">$62.00</span>
-                                </div>
-                                <div class="add_to_cart">
-                                    <a class="btn btn-primary" href="#" data-tippy="Add To Cart" data-tippy-inertia="true" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-placement="top">Add To Cart</a>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
-                <div class="col-lg-3">
-                    <article class="single_product">
-                        <figure>
-                            <div class="product_thumb">
-                                <a href="product-details.html">
-                                    <img class="primary_img" src="~/assets/img/product/product2.jpg" alt="consectetur">
-                                </a>
-                                <div class="product_action">
-                                    <ul>
-                                        <li class="wishlist">
-                                            <a href="#" data-tippy="Wishlist" data-tippy-inertia="true" data-tippy-delay="50"
-                                               data-tippy-arrow="true" data-tippy-placement="left"><i class="icon-heart icons"></i></a>
-                                        </li>
+                                                <li class="quick_view"><a data-toggle="modal" data-target="#modal_box" data-tippy="Quick View" href="#" data-tippy-inertia="true" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-placement="left"><i class="icon-size-fullscreen icons"></i></a></li>
+                                                <li class="compare">
+                                                    <a data-tippy="Compare" href="#" data-tippy-inertia="true" data-tippy-delay="50"
+                                                       data-tippy-arrow="true" data-tippy-placement="left"><i class="icon-refresh icons"></i></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <figcaption class="product_content text-center">
+                                        <div class="product_ratting">
+                                            <ul class="d-flex justify-content-center">
+                                                <li><a href="#"><i class="ion-android-star"></i></a></li>
+                                                <li><a href="#"><i class="ion-android-star"></i></a></li>
+                                                <li><a href="#"><i class="ion-android-star"></i></a></li>
+                                                <li><a href="#"><i class="ion-android-star"></i></a></li>
+                                                <li><a href="#"><i class="ion-android-star"></i></a></li>
+                                                <li><span>(4)</span></li>
+                                            </ul>
+                                        </div>
+                                        <h4 class="product_name"><a href="@url">@item.ProductName</a></h4>
+                                        <div class="price_box">
+                                            <span class="current_price">@item.Price.Value.ToString("#,##0") VNĐ</span>
+                                            @if (item.Discount > 0)
+                                            {
+                                                <span class="old_price">@item.Discount.Value.ToString("#,##0") VNĐ</span>
+                                            }
 
-                                        <li class="quick_view"><a data-toggle="modal" data-target="#modal_box" data-tippy="Quick View" href="#" data-tippy-inertia="true" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-placement="left"><i class="icon-size-fullscreen icons"></i></a></li>
-                                        <li class="compare">
-                                            <a data-tippy="Compare" href="#" data-tippy-inertia="true" data-tippy-delay="50"
-                                               data-tippy-arrow="true" data-tippy-placement="left"><i class="icon-refresh icons"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product_label">
-                                    <span>-20%</span>
-                                </div>
-                            </div>
-                            <figcaption class="product_content text-center">
-                                <div class="product_ratting">
-                                    <ul class="d-flex justify-content-center">
-                                        <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                        <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                        <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                        <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                        <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                        <li><span>(6)</span></li>
-                                    </ul>
-                                </div>
-                                <h4 class="product_name"><a href="product-details.html">Make Thing Happen T-Shirts</a></h4>
-                                <div class="price_box">
-                                    <span class="text-black">$38.00</span>
+                                        </div>
+                                        <div class="add_to_cart">
+                                            <a class="btn btn-primary" href="#" data-tippy="Add To Cart" data-tippy-inertia="true" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-placement="top">Add To Cart</a>
+                                        </div>
+                                    </figcaption>
+                                </figure>
+                            </article>
+                        </div>
+                    }
+                }
 
-                                </div>
-                                <div class="add_to_cart">
-                                    <a class="btn btn-primary" href="#" data-tippy="Add To Cart" data-tippy-inertia="true" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-placement="top">Add To Cart</a>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
-                <div class="col-lg-3">
-                    <article class="single_product">
-                        <figure>
-                            <div class="product_thumb">
-                                <a href="product-details.html">
-                                    <img class="primary_img" src="~/assets/img/product/product3.jpg" alt="consectetur">
-                                </a>
-                                <div class="product_action">
-                                    <ul>
-                                        <li class="wishlist">
-                                            <a href="#" data-tippy="Wishlist" data-tippy-inertia="true" data-tippy-delay="50"
-                                               data-tippy-arrow="true" data-tippy-placement="left"><i class="icon-heart icons"></i></a>
-                                        </li>
-
-                                        <li class="quick_view"><a data-toggle="modal" data-target="#modal_box" data-tippy="Quick View" href="#" data-tippy-inertia="true" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-placement="left"><i class="icon-size-fullscreen icons"></i></a></li>
-                                        <li class="compare">
-                                            <a data-tippy="Compare" href="#" data-tippy-inertia="true" data-tippy-delay="50"
-                                               data-tippy-arrow="true" data-tippy-placement="left"><i class="icon-refresh icons"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product_label">
-                                    <span>-18%</span>
-                                </div>
-                            </div>
-                            <figcaption class="product_content text-center">
-                                <div class="product_ratting">
-                                    <ul class="d-flex justify-content-center">
-                                        <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                        <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                        <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                        <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                        <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                        <li><span>(2)</span></li>
-                                    </ul>
-                                </div>
-                                <h4 class="product_name"><a href="product-details.html">Basic White Simple Sneaker</a></h4>
-                                <div class="price_box">
-                                    <span class="current_price">$43.00</span>
-                                    <span class="old_price">$46.00</span>
-                                </div>
-                                <div class="add_to_cart">
-                                    <a class="btn btn-primary" href="#" data-tippy="Add To Cart" data-tippy-inertia="true" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-placement="top">Add To Cart</a>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
-                <div class="col-lg-3">
-                    <article class="single_product">
-                        <figure>
-                            <div class="product_thumb">
-                                <a href="product-details.html">
-                                    <img class="primary_img" src="~/assets/img/product/product4.jpg" alt="consectetur">
-                                </a>
-                                <div class="product_action">
-                                    <ul>
-                                        <li class="wishlist">
-                                            <a href="#" data-tippy="Wishlist" data-tippy-inertia="true" data-tippy-delay="50"
-                                               data-tippy-arrow="true" data-tippy-placement="left"><i class="icon-heart icons"></i></a>
-                                        </li>
-
-                                        <li class="quick_view"><a data-toggle="modal" data-target="#modal_box" data-tippy="Quick View" href="#" data-tippy-inertia="true" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-placement="left"><i class="icon-size-fullscreen icons"></i></a></li>
-                                        <li class="compare">
-                                            <a data-tippy="Compare" href="#" data-tippy-inertia="true" data-tippy-delay="50"
-                                               data-tippy-arrow="true" data-tippy-placement="left"><i class="icon-refresh icons"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <figcaption class="product_content text-center">
-                                <div class="product_ratting">
-                                    <ul class="d-flex justify-content-center">
-                                        <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                        <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                        <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                        <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                        <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                        <li><span>(8)</span></li>
-                                    </ul>
-                                </div>
-                                <h4 class="product_name"><a href="product-details.html">Simple Rounded Sunglasses</a></h4>
-                                <div class="price_box">
-                                    <span class="text-black">$42.00</span>
-                                </div>
-                                <div class="add_to_cart">
-                                    <a class="btn btn-primary" href="#" data-tippy="Add To Cart" data-tippy-inertia="true" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-placement="top">Add To Cart</a>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
-                <div class="col-lg-3">
-                    <article class="single_product">
-                        <figure>
-                            <div class="product_thumb">
-                                <a href="product-details.html">
-                                    <img class="primary_img" src="~/assets/img/product/product1.jpg" alt="consectetur">
-                                </a>
-                                <div class="product_action">
-                                    <ul>
-                                        <li class="wishlist">
-                                            <a href="#" data-tippy="Wishlist" data-tippy-inertia="true" data-tippy-delay="50"
-                                               data-tippy-arrow="true" data-tippy-placement="left"><i class="icon-heart icons"></i></a>
-                                        </li>
-
-                                        <li class="quick_view"><a data-toggle="modal" data-target="#modal_box" data-tippy="Quick View" href="#" data-tippy-inertia="true" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-placement="left"><i class="icon-size-fullscreen icons"></i></a></li>
-                                        <li class="compare">
-                                            <a data-tippy="Compare" href="#" data-tippy-inertia="true" data-tippy-delay="50"
-                                               data-tippy-arrow="true" data-tippy-placement="left"><i class="icon-refresh icons"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <figcaption class="product_content text-center">
-                                <div class="product_ratting">
-                                    <ul class="d-flex justify-content-center">
-                                        <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                        <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                        <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                        <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                        <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                        <li><span>(12)</span></li>
-                                    </ul>
-                                </div>
-                                <h4 class="product_name"><a href="product-details.html">Basic Joggin Shorts</a></h4>
-                                <div class="price_box">
-                                    <span class="current_price">$26.00</span>
-                                    <span class="old_price">$362.00</span>
-                                </div>
-                                <div class="add_to_cart">
-                                    <a class="btn btn-primary" href="#" data-tippy="Add To Cart" data-tippy-inertia="true" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-placement="top">Add To Cart</a>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
-                <div class="col-lg-3">
-                    <article class="single_product">
-                        <figure>
-                            <div class="product_thumb">
-                                <a href="product-details.html">
-                                    <img class="primary_img" src="~/assets/img/product/product2.jpg" alt="consectetur">
-                                </a>
-                                <div class="product_action">
-                                    <ul>
-                                        <li class="wishlist">
-                                            <a href="#" data-tippy="Wishlist" data-tippy-inertia="true" data-tippy-delay="50"
-                                               data-tippy-arrow="true" data-tippy-placement="left"><i class="icon-heart icons"></i></a>
-                                        </li>
-
-                                        <li class="quick_view"><a data-toggle="modal" data-target="#modal_box" data-tippy="Quick View" href="#" data-tippy-inertia="true" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-placement="left"><i class="icon-size-fullscreen icons"></i></a></li>
-                                        <li class="compare">
-                                            <a data-tippy="Compare" href="#" data-tippy-inertia="true" data-tippy-delay="50"
-                                               data-tippy-arrow="true" data-tippy-placement="left"><i class="icon-refresh icons"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product_label">
-                                    <span>-20%</span>
-                                </div>
-                            </div>
-                            <figcaption class="product_content text-center">
-                                <div class="product_ratting">
-                                    <ul class="d-flex justify-content-center">
-                                        <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                        <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                        <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                        <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                        <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                        <li><span>(14)</span></li>
-                                    </ul>
-                                </div>
-                                <h4 class="product_name"><a href="product-details.html">Simple Rounded Sunglasses</a></h4>
-                                <div class="price_box">
-                                    <span class="current_price">$35.00</span>
-                                    <span class="old_price">$38.00</span>
-                                </div>
-                                <div class="add_to_cart">
-                                    <a class="btn btn-primary" href="#" data-tippy="Add To Cart" data-tippy-inertia="true" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-placement="top">Add To Cart</a>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
             </div>
         </div>
     </div>

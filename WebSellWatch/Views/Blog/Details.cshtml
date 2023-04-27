@@ -1,115 +1,147 @@
 ﻿@model WebSellWatch.Models.TinDang
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = Model.Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
+    string url = $"/tin-tuc/{Model.Alias}-{Model.PostId}.html";
 }
 
-<h1>Details</h1>
+<div class="blog_details" style="margin-top: 170px">
+    <div class="blog_details_thumb" style=" display: flex; justify-content: center;">
+        <img src="~/images/news/@Model.Thumb" alt="">
+    </div>
+    <div class="blog_wrapper_details">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="blog_details_content">
+                        <div class="post_header">
+                            <h2 class="post_title">@Model.Title</h2>
+                            <div class="blog_meta">
+                                <ul class="d-flex">
+                                    <li>Adam Levine </li>
+                                    <li>@Model.CreatedDate.Value.ToLongDateString() </li>
+                                    <li>INSPIRATION</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="blog_details_desc">
+                            <h3> @Html.Raw(Model.Contents)</h3>
 
-<div>
-    <h4>TinDang</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Scontents)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Scontents)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Contents)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Contents)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Thumb)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Thumb)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Published)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Published)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Alias)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Alias)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Author)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Author)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AccountId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AccountId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Tags)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Tags)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CatId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CatId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsHot)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsHot)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsNewfeed)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsNewfeed)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MetaKey)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MetaKey)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MetaDesc)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MetaDesc)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Views)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Views)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.PostId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+                       
+                        </div>
+
+                    </div>
+                    <div class="related_posts">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <figure class="related_thumb">
+                                    <img src="assets/img/blog/related1.jpg" alt="">
+                                    <div class="related_popup_icon">
+                                        <a class="port_popup" href="assets/img/blog/related1.jpg"><i class="icon-size-fullscreen icons"></i></a>
+                                    </div>
+                                </figure>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <figure class="related_thumb">
+                                    <img src="assets/img/blog/related2.jpg" alt="">
+                                    <div class="related_popup_icon">
+                                        <a class="port_popup" href="assets/img/blog/related2.jpg"><i class="icon-size-fullscreen icons"></i></a>
+                                    </div>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post_tags_social border-bottom">
+                        <div class="post_tags d-flex justify-content-center align-items-center">
+                            <span>TAGS: </span>
+                            <ul class="d-flex">
+                                <li><a href="#">Inspiration,</a></li>
+                                <li><a href="#">Workspace,</a></li>
+                                <li><a href="#">Minimal,</a></li>
+                                <li><a href="#">Decoation</a></li>
+                            </ul>
+                        </div>
+                        <div class="post__social d-flex justify-content-center align-items-center">
+                            <span>SHARE:</span>
+                            <ul class="d-flex">
+                                <li><a href="#"><i class="ion-social-twitter"></i></a></li>
+                                <li><a href="#"><i class="ion-social-facebook"></i></a></li>
+                                <li><a href="#"><i class="ion-social-googleplus"></i></a></li>
+                                <li><a href="#"><i class="ion-social-instagram-outline"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="blog_navigation">
+                        <ul class="d-flex justify-content-between">
+                            <li class="previous"><a href="#"><i class="icon-arrow-left icons"></i> Previous</a> <span>How to combine typography perfect for any design</span></li>
+                            <li class="next"><a href="#">Next  <i class="icon-arrow-right icons"></i></a> <span>Cocooil - Review</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@*    <div class="blog_comment_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="comments_box">
+                        <h3>02 Comments	</h3>
+                        <div class="comment_list d-flex">
+                            <div class="comment_thumb">
+                                <img src="assets/img/blog/post-comment1.png" alt="">
+                            </div>
+                            <div class="comment_content border-top">
+                                <div class="comment_meta d-flex align-items-center">
+                                    <h5><a href="#">Justin Bieber </a></h5>
+                                    <span> - Aug 26 2020 at 15 hours ago</span>
+                                </div>
+                                <p>Comment example here. Nulla risus lacus, vehicula id mi vitae, auctor accumsan nulla.Sed a dolor sit amrt paremi quam. terdum.</p>
+                                <div class="comment_reply">
+                                    <a href="#">Reply</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="comment_list d-flex">
+                            <div class="comment_thumb">
+                                <img src="assets/img/blog/post-comment2.png" alt="">
+                            </div>
+                            <div class="comment_content border-top">
+                                <div class="comment_meta d-flex align-items-center">
+                                    <h5><a href="#">Selena Gomes </a></h5>
+                                    <span> - Aug 26 2020 at 15 hours ago</span>
+                                </div>
+                                <p>Comment example here. Nulla risus lacus, vehicula id mi vitae, auctor accumsan nulla.Sed a dolor sit amrt paremi quam. terdum.</p>
+                                <div class="comment_reply">
+                                    <a href="#">Reply</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comments_form">
+                        <h3>Leave a comment </h3>
+                        <form action="#">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <input placeholder="Name *" type="text">
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <input placeholder="Email *" type="text">
+                                </div>
+                                <div class="col-12">
+                                    <input placeholder="Subject (optional)" type="text">
+                                </div>
+                                <div class="col-12">
+                                    <textarea placeholder="Message"></textarea>
+                                </div>
+
+                            </div>
+                            <button class="btn btn-primary" type="submit">Post Comment</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
 </div>

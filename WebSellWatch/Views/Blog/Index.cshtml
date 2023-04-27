@@ -1,7 +1,11 @@
-﻿@model IEnumerable<WebSellWatch.Models.TinDang>
+﻿@model PagedList.Core.IPagedList<WebSellWatch.Models.TinDang>
+@using PagedList.Core.Mvc
 @{
-    ViewData["Title"] = "Blog";
+    ViewData["TiTle"] = "Blog - " + ViewBag.CurrentPage;
     Layout = "~/Views/Shared/_Layout.cshtml";
+    int PageCurrent = ViewBag.CurrentPage;
+    int PageNext = PageCurrent + 1;
+
 }
 
 <!--breadcrumbs area start-->
@@ -37,7 +41,7 @@
             {
                 foreach(var item in Model)
                 {
-                    string url = "";
+                    string url = $"/tintuc/{item.Alias}-{item.PostId}.html";
                     <div class="col-lg-4 col-md-6 col-sm-6 gird_item nspiration community">
                         <article class="single_blog products community">
                             <figure>
@@ -63,14 +67,9 @@
         </div>
         <div class="pagination_style pagination blog_pagination justify-content-center">
             <ul class="d-flex">
-                <li><a class="current" href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">...</a></li>
-                <li><a href="#">15</a></li>
-                <li><a href="#">16</a></li>
-                <li><a href="#">>></a></li>
+                <li><a class="current" href="/blog.html?page=@PageCurrent">@PageCurrent</a></li>
+                <li><a href="/blogs.html?page=@PageNext">@PageNext</a></li>
+                <li><a href="/blogs.html?page=@PageNext" aria-label="Next">>></a></li>
             </ul>
         </div>
     </div>

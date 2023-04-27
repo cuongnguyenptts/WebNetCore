@@ -26,6 +26,7 @@ namespace WebSellWatch.Models
         public virtual DbSet<OrderDetail> OrderDetails { get; set; } = null!;
         public virtual DbSet<Page> Pages { get; set; } = null!;
         public virtual DbSet<Product> Products { get; set; } = null!;
+        public virtual DbSet<QuangCao> QuangCaos { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<Shipper> Shippers { get; set; } = null!;
         public virtual DbSet<TinDang> TinDangs { get; set; } = null!;
@@ -35,6 +36,7 @@ namespace WebSellWatch.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseSqlServer("Server=DucCuong\\SQLEXPRESS;Database=dbWatches;Trusted_Connection=True;");
             }
         }
@@ -280,6 +282,25 @@ namespace WebSellWatch.Models
                     .HasConstraintName("FK_Products_Categories");
             });
 
+            modelBuilder.Entity<QuangCao>(entity =>
+            {
+                entity.Property(e => e.QuangCaoId).HasColumnName("QuangCaoID");
+
+                entity.Property(e => e.CreateDate).HasColumnType("datetime");
+
+                entity.Property(e => e.ImageBg)
+                    .HasMaxLength(250)
+                    .HasColumnName("ImageBG");
+
+                entity.Property(e => e.ImageProduct).HasMaxLength(250);
+
+                entity.Property(e => e.SubTitle).HasMaxLength(150);
+
+                entity.Property(e => e.Title).HasMaxLength(150);
+
+                entity.Property(e => e.UrlLink).HasMaxLength(250);
+            });
+
             modelBuilder.Entity<Role>(entity =>
             {
                 entity.HasKey(e => e.RolesId)
@@ -339,6 +360,16 @@ namespace WebSellWatch.Models
                 entity.Property(e => e.Thumb).HasMaxLength(255);
 
                 entity.Property(e => e.Title).HasMaxLength(255);
+
+                entity.HasOne(d => d.Account)
+                    .WithMany(p => p.TinDangs)
+                    .HasForeignKey(d => d.AccountId)
+                    .HasConstraintName("FK_TinDangs_Accounts");
+
+                entity.HasOne(d => d.Cat)
+                    .WithMany(p => p.TinDangs)
+                    .HasForeignKey(d => d.CatId)
+                    .HasConstraintName("FK_TinDangs_Categories");
             });
 
             modelBuilder.Entity<TransactStatus>(entity =>

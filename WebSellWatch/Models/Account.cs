@@ -5,6 +5,11 @@ namespace WebSellWatch.Models
 {
     public partial class Account
     {
+        public Account()
+        {
+            TinDangs = new HashSet<TinDang>();
+        }
+
         public int AccountId { get; set; }
         public string? Phone { get; set; }
         public string? Email { get; set; }
@@ -17,5 +22,6 @@ namespace WebSellWatch.Models
         public DateTime? CreateDate { get; set; }
 
         public virtual Role? Roles { get; set; }
+        public virtual ICollection<TinDang> TinDangs { get; set; }
     }
 }
