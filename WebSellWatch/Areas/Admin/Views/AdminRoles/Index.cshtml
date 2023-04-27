@@ -1,0 +1,46 @@
+﻿@model IEnumerable<WebSellWatch.Models.Role>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<p>
+    <a class="btn btn-primary m-r-5" asp-area="Admin" asp-controller="AdminRoles" asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.RolesName)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th scope="col">#</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RolesId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RolesName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    <a class="btn btn-primary btn-tone m-r-5" asp-action="Edit" asp-route-id="@item.RolesId">Edit</a> |
+                    <a class="btn btn-success btn-tone m-r-5" asp-action="Details" asp-route-id="@item.RolesId">Details</a> |
+                    <a class="btn btn-danger btn-tone m-r-5" asp-action="Delete" asp-route-id="@item.RolesId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
