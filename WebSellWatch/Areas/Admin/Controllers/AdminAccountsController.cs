@@ -2,10 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using WebSellWatch.Areas.Admin.Models;
+using WebSellWatch.Extension;
+using WebSellWatch.Helpper;
 using WebSellWatch.Models;
+using WebSellWatch.ModelViews;
 
 namespace WebSellWatch.Areas.Admin.Controllers
 {
@@ -13,16 +18,17 @@ namespace WebSellWatch.Areas.Admin.Controllers
     public class AdminAccountsController : Controller
     {
         private readonly dbWatchesContext _context;
-
-        public AdminAccountsController(dbWatchesContext context)
+        public INotyfService _notyfService { get; }
+        public AdminAccountsController(dbWatchesContext context, INotyfService notyfService)
         {
             _context = context;
+            _notyfService = notyfService;
         }
 
         // GET: Admin/AdminAccounts
         public async Task<IActionResult> Index()
         {
-            ViewData["QuyenTruyCap"] = new SelectList(_context.Roles, "RolesId", "Description");
+            ViewData["QuyenTruyCap"] = new SelectList(_context.Roles, "RolesId", "RolesName");
             List<SelectListItem> IsTrangThai = new List<SelectListItem>();
             IsTrangThai.Add(new SelectListItem() { Text = "Active", Value = "1" });
             IsTrangThai.Add(new SelectListItem() { Text = "Block", Value = "0" });
@@ -54,7 +60,7 @@ namespace WebSellWatch.Areas.Admin.Controllers
         // GET: Admin/AdminAccounts/Create
         public IActionResult Create()
         {
-            ViewData["RolesId"] = new SelectList(_context.Roles, "RolesId", "RolesId");
+            ViewData["QuyenTruyCap"] = new SelectList(_context.Roles, "RolesId", "RolesName");
             return View();
         }
 
@@ -67,12 +73,42 @@ namespace WebSellWatch.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                string salt = Utilities.GetRandomKey();
+                account.Salt = salt;
+                account.Password = (account.Phone + salt.Trim()).ToMD5();
+                account.CreateDate = DateTime.Now; 
+
                 _context.Add(account);
                 await _context.SaveChangesAsync();
+                _notyfService.Success("Tạo tài khoản thành công");
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["RolesId"] = new SelectList(_context.Roles, "RolesId", "RolesId", account.RolesId);
+            ViewData["QuyenTruyCap"] = new SelectList(_context.Roles, "RolesId", "RolesName", account.RolesId);
             return View(account);
+        }
+
+
+        [HttpPost]
+        public IActionResult ChangePassword(AChangePasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var taikhoan = _context.Accounts.AsNoTracking().SingleOrDefault(x => x.Email == model.Email);
+                if (taikhoan == null) return RedirectToAction("Login", "Accounts");
+                var pass = (model.PasswordNow.Trim() + taikhoan.Salt.Trim()).ToMD5();
+                {
+                    string passnew = (model.Password.Trim() + taikhoan.Salt.Trim()).ToMD5();
+                    taikhoan.Password = passnew;
+                    taikhoan.LastLogin = DateTime.Now;
+                    _context.Update(taikhoan);
+                    _context.SaveChanges();
+                    _notyfService.Success("Đổi mật khẩu thành công");
+                    return RedirectToAction("Login", "Accounts", new { Area = "Admin" });
+                }
+            }
+
+
+            return View();
         }
 
         // GET: Admin/AdminAccounts/Edit/5

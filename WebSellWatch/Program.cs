@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using Microsoft.AspNetCore.Session;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -14,11 +15,12 @@ using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using System.Threading.Tasks;
 using WebSellWatch.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("dbWatches");
 
-
+ // <-- exception here
 
 
 // Add services to the container.
@@ -28,6 +30,17 @@ builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddRazorPages();
 builder.Services.AddNotyf(config => { config.DurationInSeconds = 3; config.IsDismissable = true; config.Position = NotyfPosition.TopRight; });
 builder.Services.AddMvc();
+builder.Services.AddSession();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(p =>
+    {
+        p.Cookie.Name = "UserLoginCookie";
+        p.ExpireTimeSpan = TimeSpan.FromDays(1);
+        p.LoginPath = "/dang-nhap.html";
+        //p.LogoutPath = "/dang-xuat/html";
+        p.AccessDeniedPath = "/not-found.html";
+    });
+
 
 var app = builder.Build();
 
@@ -43,9 +56,10 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapRazorPages();
+app.UseSession();
 
 app.UseEndpoints(endpoints =>
 {

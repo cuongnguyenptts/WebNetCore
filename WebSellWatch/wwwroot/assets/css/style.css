@@ -6315,12 +6315,20 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   }
 }
 
+.blog_comment_form .container {
+    border: 1px solid;
+    width: 661px;
+    height: 590px;
+    max-width: 812px;
+}
 .comments_form h3 {
-  font-size: 24px;
-  font-weight: 600;
-  line-height: 26px;
-  text-transform: uppercase;
-  margin-bottom: 41px;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 26px;
+    text-transform: uppercase;
+    margin-bottom: 41px;
+    margin-top: 40px
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .comments_form h3 {

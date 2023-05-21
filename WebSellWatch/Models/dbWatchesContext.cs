@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using WebSellWatch.ModelViews;
 
 namespace WebSellWatch.Models
 {
@@ -385,5 +386,7 @@ namespace WebSellWatch.Models
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+        public DbSet<WebSellWatch.ModelViews.RegisterViewModel>? RegisterViewModel { get; set; }
     }
 }
