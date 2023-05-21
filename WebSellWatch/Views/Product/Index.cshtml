@@ -1,14 +1,14 @@
 ﻿@model PagedList.Core.IPagedList<WebSellWatch.Models.Product>
 @using PagedList.Core.Mvc
 @{
-    ViewData["TiTle"] = "Blog - " + ViewBag.CurrentPage;
+    ViewData["TiTle"] = "Shop - " + ViewBag.CurrentPage;
     Layout = "~/Views/Shared/_Layout.cshtml";
     int PageCurrent = ViewBag.CurrentPage;
     int PageNext = PageCurrent + 1;
 
 }
 
-<div class="shop_section shop_reverse" style="margin-top: 50px">
+<div class="shop_section shop_reverse" style="margin-top: 100px">
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-12">
@@ -19,89 +19,30 @@
                             <h2>Danh sách sản phẩm</h2>
                             <ul>
                                 <li class="widget_sub_categories">
-                                    <a href="javascript:void(0)" data-toggle="collapse" data-target="#men">Men</a>
+                                    <a href="javascript:void(0)" data-toggle="collapse" data-target="#men">Hãng</a>
                                     <ul class="widget_dropdown_categories collapse show" id="men">
-                                        <li><a href="#"> New products <span>104</span></a></li>
-                                        <li><a href="#">Gymwear <span>68</span></a></li>
-                                        <li><a href="#">Jakets <span>75</span></a></li>
-                                        <li><a href="#">Jeans <span>30</span></a></li>
-                                        <li><a href="#">Shirts <span>150</span></a></li>
-                                        <li><a href="#">T-Shirts <span>113</span></a></li>
-                                        <li><a href="#">Accessories <span>95</span></a></li>
+                                        <li><a href="#">Patek Philippe<span>20</span></a></li>
+                                        <li><a href="#">TAG Heuer<span>5</span></a></li>
+                                        <li><a href="#">Rolex <span>10</span></a></li>
+                                        <li><a href="#"> Hublot <span>30</span></a></li>
+                                        <li><a href="#"> CALVIN KLEIN <span>150</span></a></li>
                                     </ul>
                                 </li>
-                                <li class="widget_sub_categories">
-                                    <a href="javascript:void(0)" data-toggle="collapse" data-target="#women">women</a>
-                                    <ul class="widget_dropdown_categories collapse" id="women">
-                                        <li><a href="#"> New products <span>104</span></a></li>
-                                        <li><a href="#">Gymwear <span>68</span></a></li>
-                                        <li><a href="#">Jakets <span>75</span></a></li>
-                                        <li><a href="#">Jeans <span>30</span></a></li>
-                                        <li><a href="#">Shirts <span>150</span></a></li>
-                                        <li><a href="#">T-Shirts <span>113</span></a></li>
-                                        <li><a href="#">Accessories <span>95</span></a></li>
-                                    </ul>
-                                </li>
-                                <li class="widget_sub_categories">
-                                    <a href="javascript:void(0)" data-toggle="collapse" data-target="#footwear">footwear</a>
-                                    <ul class="widget_dropdown_categories collapse" id="footwear">
-                                        <li><a href="#"> New products <span>104</span></a></li>
-                                        <li><a href="#">Gymwear <span>68</span></a></li>
-                                        <li><a href="#">Jakets <span>75</span></a></li>
-                                        <li><a href="#">Jeans <span>30</span></a></li>
-                                        <li><a href="#">Shirts <span>150</span></a></li>
-                                        <li><a href="#">T-Shirts <span>113</span></a></li>
-                                        <li><a href="#">Accessories <span>95</span></a></li>
-                                    </ul>
-                                </li>
-                                <li class="widget_sub_categories">
-                                    <a href="javascript:void(0)" data-toggle="collapse" data-target="#accessories">accessories</a>
-                                    <ul class="widget_dropdown_categories collapse" id="accessories">
-                                        <li><a href="#"> New products <span>104</span></a></li>
-                                        <li><a href="#">Gymwear <span>68</span></a></li>
-                                        <li><a href="#">Jakets <span>75</span></a></li>
-                                        <li><a href="#">Jeans <span>30</span></a></li>
-                                        <li><a href="#">Shirts <span>150</span></a></li>
-                                        <li><a href="#">T-Shirts <span>113</span></a></li>
-                                        <li><a href="#">Accessories <span>95</span></a></li>
-                                    </ul>
-                                </li>
+
                             </ul>
                         </div>
                         <div class="widget_list widget_filter">
-                            <h2>Filter By</h2>
+                            <h2>Giá</h2>
                             <div class="filter__list slider_range">
-                                <h3>price</h3>
+                                <h3>Giá</h3>
                                 <form action="#">
                                     <div id="slider-range"></div>
-                                    <span>Range:</span>
+    
                                     <input type="text" name="text" id="amount" />
-
                                 </form>
                             </div>
-
-                            <div class="filter__list widget_size">
-                                <h3> size</h3>
-                                <ul>
-                                    <li>
-                                        <a href="javascript:void(0)">S </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0)"> M</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0)">L</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0)"> XL</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0)">XLL</a>
-                                    </li>
-                                </ul>
-                            </div>
                             <div class="filter__list widget_color">
-                                <h3>color</h3>
+                                <h3>Màu</h3>
                                 <ul>
                                     <li>
                                         <input type="checkbox">
@@ -118,59 +59,11 @@
                                     <li>
                                         <input type="checkbox">
                                         <span class="checkmark color4"></span>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox">
-                                        <span class="checkmark color5"></span>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox">
-                                        <span class="checkmark color6"></span>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox">
-                                        <span class="checkmark color7"></span>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox">
-                                        <span class="checkmark color8"></span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="filter__list widget_brands">
-                                <h3 data-toggle="collapse" data-target="#brands">brands</h3>
-                                <ul class="widget_dropdown_categories collapse show" id="brands">
-                                    <li><a href="#"> The North Face <span>104</span></a></li>
-                                    <li><a href="#">Zara Basic <span>68</span></a></li>
-                                    <li><a href="#">Moschino <span>75</span></a></li>
-                                    <li><a href="#">Supreme <span>30</span></a></li>
-                                    <li><a href="#">Ecko Unltd <span>150</span></a></li>
+                                    </li>                              
                                 </ul>
                             </div>
                         </div>
-                        <div class="widget_list">
-                            <h2>Recent Product</h2>
-                            <div class="recent_product">
-                                <div class="recent_product_list d-flex mb-25">
-                                    <div class="recent_thumb">
-                                        <a href="product-details.html"><img src="~/assets/img/product/product4.jpg" alt=""></a>
-                                    </div>
-                                    <div class="recent_content">
-                                        <h4><a href="product-details.html">Barbour T-shirt <br> International</a></h4>
-                                        <span>$32.00</span>
-                                    </div>
-                                </div>
-                                <div class="recent_product_list d-flex">
-                                    <div class="recent_thumb">
-                                        <a href="product-details.html"><img src="~/assets/img/product/product6.jpg" alt=""></a>
-                                    </div>
-                                    <div class="recent_content">
-                                        <h4><a href="product-details.html">Barbour T-shirt <br> International</a></h4>
-                                        <span>$32.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                       
                     </div>
                 </aside>
                 <!--sidebar widget end-->
@@ -180,7 +73,7 @@
                 <!--breadcrumbs area start-->
                 <div class="breadcrumb_content">
                     <ul>
-                        <li><a href="index.html">home</a></li>
+                        <li><a href="index.html">Trang Chủ</a></li>
                         <li>shop</li>
                     </ul>
                 </div>
@@ -188,14 +81,14 @@
                 <!--shop toolbar start-->
                 <div class="shop_toolbar_wrapper d-flex justify-content-between align-items-center">
                     <div class="page_amount">
-                        <p><span>1.260</span> Products Found</p>
+                        <p><span>50</span> Sản phẩm được tìm thấy</p>
                     </div>
                     <div class=" sorting_by d-flex align-items-center">
                         <span>SORT BY :</span>
                         <form class="select_option" action="#">
                             <select name="orderby" id="short">
 
-                                <option selected value="1">NAME       3</option>
+                                <option selected value="1">NAME         </option>
                                 <option value="2">NAME  4</option>
                                 <option value="3">NAME  5</option>
                                 <option value="4">NAME  6</option>
@@ -225,7 +118,7 @@
                                 <div class="single_product">
                                     <div class="product_thumb">
                                         <a href="@url">
-                                            <img class="primary_img" src="~/images/products/@item.Thumb" alt="@item.Title">
+                                            <img style="width:274px; height:274px" class="primary_img" src="~/images/products/@item.Thumb" alt="@item.Title">
                                         </a>
                                         <div class="product_action">
                                             <ul>
@@ -273,9 +166,9 @@
                                         <div class="product_desc">
                                             <p>@item.ShortDesc</p>
                                         </div>
-                                        <div class="add_to_cart">
-                                            <a class="btn btn-primary" href="#" data-tippy="Add To Cart" data-tippy-inertia="true" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-placement="top">Add To Cart</a>
-
+                                        <div class="add-to-cart">
+                                            <a asp-controller="ShoppingCar" asp-action="AddToCart" class="add-to-cart btn btn-primary" data-tippy="Add To Cart" data-tippy-inertia="true" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-placement="top">Add To Cart</a>
+                                                <input hidden asp-for="@item.ProductId"/>                                      
                                         </div>
                                     </div>
                                 </div>
@@ -287,6 +180,8 @@
                     <ul class="d-flex">
                         <li><a href="#"> << </a></li>
                         <li><a class="current" list="@Model" options="@PagedListRenderOptions.Bootstrap4PageNumbersOnly" asp-area="" asp-controller="Product" asp-action="Index">1</a></li>
+                        <li><a class="#" >2</a></li>
+                        <li><a class="#">3</a></li>
                         <li><a href="#">>></a></li>
                     </ul>
                 </div>
@@ -330,16 +225,6 @@
                                                             </p>
                                                         </div>
                                                         <div class="variants_selects">
-                                                            <div class="variants_size">
-                                                                <h2>size</h2>
-                                                                <select class="select_option">
-                                                                    <option selected value="1">s</option>
-                                                                    <option value="1">m</option>
-                                                                    <option value="1">l</option>
-                                                                    <option value="1">xl</option>
-                                                                    <option value="1">xxl</option>
-                                                                </select>
-                                                            </div>
                                                             <div class="variants_color">
                                                                 <h2>color</h2>
                                                                 <select class="select_option">
@@ -352,7 +237,7 @@
                                                             </div>
                                                             <div class="modal_add_to_cart">
                                                                 <form action="#">
-                                                                    <input min="1" max="100" step="2" value="1" type="number">
+                                                                    <input min="1" max="100" step="1" value="1" type="number">
                                                                     <button type="submit">add to cart</button>
                                                                 </form>
                                                             </div>
@@ -387,4 +272,89 @@
         </div>
     </div>
 </div>
+<section class="newsletter_section newsletter_padding border-top">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="newsletter_inner d-flex justify-content-between align-items-center">
+                    <div class="newsletter_text">
+                        <h3>Đăng kí ngay</h3>
+                        <p>Nhận tin tức mới nhất bản tin của chúng tôi</p>
+                    </div>
+                    <div class="newsletter_subscribe">
+                        <form id="mc-form">
+                            <input class="border-0" id="mc-email" type="email" autocomplete="off" placeholder="Enter your email address">
+                            <i class="icon-envelope-open icons"></i>
+                            <button class="border-0" id="mc-submit">Đăng Kí</button>
+                        </form>
+                        <!-- mailchimp-alerts Start -->
+                        <div class="mailchimp-alerts text-centre">
+                            <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
+                            <div class="mailchimp-success"></div><!-- mailchimp-success end -->
+                            <div class="mailchimp-error"></div><!-- mailchimp-error end -->
+                        </div><!-- mailchimp-alerts end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--newsletter section end-->
 <!--shop  area end-->
+@section Scripts{
+@*    <script>
+        $(document).ready(function () {
+            $(function () {
+                $(".add-to-cart").click(function () {
+                    var productid = $('#ProductId').val();
+                    var soLuong = $('#txtsoLuong').val();
+                    $.ajax({
+                        url: '/api/cart/add',
+                        type: "POST",
+                        dataType: "JSON",
+                        data: {
+                            productID: productid,
+                            amount: soLuong
+                        },
+                        success: function (response) {
+                            if (response.result == 'Redirect') {
+                                window.location = response.url;
+                            }
+                            else {
+                                loadHeaderCart(); //Add Product success
+                                location.reload();
+                            }
+                            console.log(response); // log to the console to see whether it worked
+                        },
+                        error: function (error) {
+                            alert("There was an error posting the data to the server: " + error.responseText);
+                        }
+                    });
+                });
+
+        $(".removecart").click(function () {
+                var productid = $(this).attr("data-productid");
+                $.ajax({
+                url: "api/cart/remove",
+                type: "POST",
+                dataType: "JSON",
+                data: { productID: productid },
+                success: function (result) {
+                if (result.success) {
+                loadHeaderCart();//Reload lai gio hang
+                location.reload();
+                }
+                },
+                error: function (rs) {
+                alert("Remove Cart Error !")
+                }
+                });
+                });
+                        });
+            function loadHeaderCart() {
+                $('#miniCart').load("/AjaxContent/HeaderCart");
+                $('#numberCart').load("/AjaxContent/NumberCart");
+            }
+        });
+    </script>*@
+}

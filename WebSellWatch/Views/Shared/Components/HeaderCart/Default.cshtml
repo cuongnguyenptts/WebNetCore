@@ -1,0 +1,125 @@
+﻿@model List<WebSellWatch.ModelViews.CartItem>
+@if(Model != null && Model.Count() > 0)
+{
+    <div class="cart_gallery">
+        <div class="cart_close">
+            <div class="cart_text">
+                <h3>Giỏ Hàng</h3>
+            </div>
+            <div class="mini_cart_close">
+                <a href="javascript:void(0)"><i class="icon-close icons"></i></a>
+            </div>
+        </div>
+        @foreach( var item in Model)
+        {
+            string url = $"/{item.product.Alias}-{item.product.ProductId}.html";
+            <div class="cart_item">
+                <div class="cart_img">
+                    <a href="#"><img src="~/images/products/@item.product.Thumb" alt="@item.product.Title"></a>
+                </div>
+                <div class="cart_info">
+                    <a href="#">@item.product.ProductName</a>
+                    <p>@item.amout x <span> @item.product.Price.Value.ToString("#,##0") VNĐ </span></p>
+                </div>
+                <div class="cart_remove">
+                    <li class="removecart">
+                        <a href="#"><i id="data-productid" class="icon-close icons"></i></a>
+                    </li>
+                </div>
+            </div>
+        }
+
+    </div>
+    <div class="mini_cart_table">
+        <div class="cart_table_border">
+            <div class="cart_total">
+                <span>Tổng tiền:</span>
+                <span class="price">@Model.Sum(x => x.TotalMoney).ToString("#,##0") VNĐ</span>
+            </div>
+            <div class="cart_total mt-10">
+                <span>Thanh Toán:</span>
+                <span class="price">@Model.Sum(x => x.TotalMoney).ToString("#,##0") VNĐ</span>
+            </div>
+        </div>
+    </div>
+    <div class="mini_cart_footer">
+        <div class="cart_button">
+            <a href="cart.html"><i class="fa fa-shopping-cart"></i> Xem Giỏ Hàng</a>
+        </div>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="cart_button">
+                <a href="/checkout.html"><i class="fa fa-sign-in"></i> Thanh toán</a>
+            </div>
+        }
+        else
+        {
+            <div class="cart_button">
+                <a href ="/dang-nhap.html?returnUrl=/checkout.html"><i class="fa fa-sign-in"></i> Thanh toán</a>
+            </div>
+
+        }
+
+    </div>
+}
+else
+{
+    <p> Giỏ hàng rỗng</p>
+}
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $(function () {
+                $(".add-to-cart").click(function () {
+                    var productid = $('#ProductId').val();
+                    var soLuong = $('#txtsoLuong').val();
+                    $.ajax({
+                        url: '/api/cart/add',
+                        type: "POST",
+                        dataType: "JSON",
+                        data: {
+                            productID: productid,
+                            amount: soLuong
+                        },
+                        success: function (response) {
+                            if (response.result == 'Redirect') {
+                                window.location = response.url;
+                            }
+                            else {
+                                loadHeaderCart(); //Add Product success
+                                location.reload();
+                            }
+                            console.log(response); // log to the console to see whether it worked
+                        },
+                        error: function (error) {
+                            alert("There was an error posting the data to the server: " + error.responseText);
+                        }
+                    });
+                });
+
+        $(".removecart").click(function () {
+                var productid = $(this).attr("data-productid");
+                $.ajax({
+                url: "api/cart/remove",
+                type: "POST",
+                dataType: "JSON",
+                data: { productID: productid },
+                success: function (result) {
+                if (result.success) {
+                loadHeaderCart();//Reload lai gio hang
+                location.reload();
+                }
+                },
+                error: function (rs) {
+                alert("Remove Cart Error !")
+                }
+                });
+                });
+                });
+            function loadHeaderCart() {
+                $('#miniCart').load("/AjaxContent/HeaderCart");
+                $('#numberCart').load("/AjaxContent/NumberCart");
+            }
+        });
+    </script>
+}

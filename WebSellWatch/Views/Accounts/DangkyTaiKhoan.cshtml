@@ -1,0 +1,44 @@
+﻿@model WebSellWatch.ModelViews.RegisterViewModel
+
+@{
+    ViewData["Title"] = "DangkyTaiKhoan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="blog_details" style="margin-top: 100px">
+    <div class="blog_comment_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="comments_form">
+                        <h3 style="text-align:center">Đăng kí tài khoản </h3>
+                        <form asp-action="DangkyTaiKhoan" style="text-align:center">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <input asp-for="FullName" placeholder="Họ và Tên *" type="text">
+                                </div>
+                                <div class="col-12">
+                                    <input asp-for="Email" placeholder="Email *" type="email">
+                                </div>
+                                <div class="col-12">
+                                    <input asp-for="Phone" placeholder="Số điện thoại *" type="tel">
+                                </div>
+                                <div class="col-12">
+                                    <input asp-for="Address" placeholder="Địa chỉ *" type="text">
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <input asp-for="Password" placeholder="Mật khẩu *" type="password">
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <input asp-for="ConfirmPassword" placeholder="Nhập lại mật khẩu *" type="password">
+                                </div>
+
+                            </div>
+                            <button class="btn btn-primary" type="submit">Đăng kí</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

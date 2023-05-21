@@ -1,4 +1,5 @@
-﻿@model List<Product>
+﻿
+@model List<Product>
 @if (Model != null && Model.Count() > 0)
 {
         @foreach (var item in Model)
@@ -8,7 +9,7 @@
               <figure>
                 <div class="product_thumb">
                     <a href="@url">
-                    <img class="primary_img" src="~/images/products/@item.Thumb"
+                    <img style="width:270px; height: 300px" class="primary_img" src="~/images/products/@item.Thumb"
                              alt="@item.Title">
                     </a>
                     <div class="product_action">
@@ -61,14 +62,77 @@
                             <span class="old_price">@item.Discount.Value.ToString("#,##0") VNĐ</span>
                         }
                     </div>
-                    <div class="add_to_cart">
-                        <a class="btn btn-primary" href="#" data-tippy="Add To Cart"
-                           data-tippy-inertia="true" data-tippy-delay="50" data-tippy-arrow="true"
-                           data-tippy-placement="top">Add To Cart</a>
-                    </div>
+@*                    <div class="add-to-cart">
+                        <input hidden id="txtsoLuong" name="txtsoLuong" class="cart-plus-minus-box" value="1" type="text">
+                        <li class=" add-to-cart">
+                            <button class=" add-to-cart btn btn-primary" href="#" data-tippy="Add To Cart"
+                               data-tippy-inertia="true" data-tippy-delay="50" data-tippy-arrow="true"
+                               data-tippy-placement="top" >Add To Cart</button>
+                               <input hidden asp-for="@item.ProductId" />
+                        </li>
+                    </div>*@
                 </figcaption>
             </figure>
         </article>
         }
+
+}
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $(function () {
+                $(".add-to-cart").click(function () {
+                    var productid = $('#ProductId').val();
+                    var soLuong = $('#txtsoLuong').val();
+                    $.ajax({
+                        url: '/api/cart/add',
+                        type: "POST",
+                        dataType: "JSON",
+                        data: {
+                            productID: productid,
+                            amount: soLuong
+                        },
+                        success: function (response) {
+                            if (response.result == 'Redirect') {
+                                window.location = response.url;
+                            }
+                            else {
+                                loadHeaderCart(); //Add Product success
+                                location.reload();
+                            }
+                            console.log(response); // log to the console to see whether it worked
+                        },
+                        error: function (error) {
+                            alert("There was an error posting the data to the server: " + error.responseText);
+                        }
+                    });
+                });
+
+        @*$(".removecart").click(function () {
+                var productid = $(this).attr("data-productid");
+                $.ajax({
+                url: "api/cart/remove",
+                type: "POST",
+                dataType: "JSON",
+                data: { productID: productid },
+                success: function (result) {
+                if (result.success) {
+                loadHeaderCart();//Reload lai gio hang
+                location.reload();
+                }
+                },
+                error: function (rs) {
+                alert("Remove Cart Error !")
+                }
+                });
+                });*@
+                        });
+            function loadHeaderCart() {
+                $('#miniCart').load("/AjaxContent/HeaderCart");
+                $('#numberCart').load("/AjaxContent/NumberCart");
+            }
+        });
+    </script>
 
 }

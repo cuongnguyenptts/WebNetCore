@@ -43,6 +43,7 @@ namespace WebSellWatch.Controllers
                 var quangcao = _context.QuangCaos
                     .AsNoTracking()
                     .FirstOrDefault(x => x.Active == true);
+                
 
                 var TinTuc = _context.TinDangs
                     .AsNoTracking()
@@ -57,7 +58,12 @@ namespace WebSellWatch.Controllers
             }
             return View(model);
         }
-    
+
+        [Route("lien-he.html", Name = "Contact")]
+        public IActionResult Contact()
+        {
+            return View();
+        }
 
         public IActionResult Privacy()
             {

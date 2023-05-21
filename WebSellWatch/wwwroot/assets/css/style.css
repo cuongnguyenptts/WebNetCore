@@ -538,8 +538,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .header_top {
-  background: #6a7964;
-  padding: 5px 55px 5px 45px;
+    background: #90EE90;
+    padding: 5px 55px 5px 45px;
 }
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
   .header_top {

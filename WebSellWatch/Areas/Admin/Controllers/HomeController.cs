@@ -9,5 +9,6 @@ namespace WebSellWatch.Areas.Admin.Controllers
         {
             return View();
         }
+
     }
 }

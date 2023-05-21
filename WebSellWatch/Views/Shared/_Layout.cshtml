@@ -45,16 +45,7 @@
     <!--modernizr min js here-->
     <script src="~/assets/js/vendor/modernizr-3.7.1.min.js"></script>
 
-
-    <!-- Structured Data  -->
-    @*    <script type="application/ld+json">
-    {
-    "@context": "http://schema.org",
-    "@type": "WebSite",
-    "name": "Replace_with_your_site_title",
-    "url": "Replace_with_your_site_URL"
-    }
-    </script>*@
+    @await RenderSectionAsync("Styles", required: false)
 
 </head>
 
@@ -74,18 +65,18 @@
                         <div class="header_contact_info">
                             <ul class="d-flex">
                                 <li class="text-white">
-                                    <i class="icons icon-phone"></i> <a href="tel:+05483716566">
-                                        +054
-                                        8371 65 66
+                                    <i class="icons icon-phone"></i> <a href="tel:+0988497169">
+                                        +0988
+                                        497 169
                                     </a>
                                 </li>
                                 <li class="text-white">
-                                    <i class="icon-envelope-letter icons"></i> <a href="#">uthrstore@domain.com</a>
+                                    <i class="icon-envelope-letter icons"></i> <a href="#">cuongnguyenptts@gmail.com</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="header_social d-flex">
-                            <span>Follow us</span>
+                            <span>Follow </span>
                             <ul class="d-flex">
                                 <li><a href="#"><i class="icon-social-twitter icons"></i></a></li>
                                 <li><a href="#"><i class="icon-social-facebook icons"></i></a></li>
@@ -105,7 +96,7 @@
                                     </ul>
                                 </li>
                                 <li class="currency">
-                                    <a href="#"> USd <i class="icon-right ion-ios-arrow-down"></i></a>
+                                    <a href="#"> USD <i class="icon-right ion-ios-arrow-down"></i></a>
                                     <ul class="dropdown_currency">
                                         <li><a href="#">€ Euro</a></li>
                                         <li><a href="#">£ Pound Sterling</a></li>
@@ -152,60 +143,7 @@
     <!--offcanvas menu area end-->
     <!--mini cart-->
     <div class="mini_cart">
-        <div class="cart_gallery">
-            <div class="cart_close">
-                <div class="cart_text">
-                    <h3>cart</h3>
-                </div>
-                <div class="mini_cart_close">
-                    <a href="javascript:void(0)"><i class="icon-close icons"></i></a>
-                </div>
-            </div>
-            <div class="cart_item">
-                <div class="cart_img">
-                    <a href="#"><img src="~/assets/img/product/product1.jpg" alt=""></a>
-                </div>
-                <div class="cart_info">
-                    <a href="#">Primis In Faucibus</a>
-                    <p>1 x <span> $65.00 </span></p>
-                </div>
-                <div class="cart_remove">
-                    <a href="#"><i class="icon-close icons"></i></a>
-                </div>
-            </div>
-            <div class="cart_item">
-                <div class="cart_img">
-                    <a href="#"><img src="~/assets/img/product/product2.jpg" alt=""></a>
-                </div>
-                <div class="cart_info">
-                    <a href="#">Letraset Sheets</a>
-                    <p>1 x <span> $60.00 </span></p>
-                </div>
-                <div class="cart_remove">
-                    <a href="#"><i class="icon-close icons"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="mini_cart_table">
-            <div class="cart_table_border">
-                <div class="cart_total">
-                    <span>Sub total:</span>
-                    <span class="price">$125.00</span>
-                </div>
-                <div class="cart_total mt-10">
-                    <span>total:</span>
-                    <span class="price">$125.00</span>
-                </div>
-            </div>
-        </div>
-        <div class="mini_cart_footer">
-            <div class="cart_button">
-                <a href="cart.html"><i class="fa fa-shopping-cart"></i> View cart</a>
-            </div>
-            <div class="cart_button">
-                <a href="checkout.html"><i class="fa fa-sign-in"></i> Checkout</a>
-            </div>
-        </div>
+        @await Component.InvokeAsync("HeaderCart")
     </div>
     <!--mini cart end-->
     <!--header area start-->
@@ -219,6 +157,7 @@
     <!-- modal area end-->
     <!-- JS
     ============================================ -->
+
     <script src="~/~/assets/js/mailchimp-ajax.js"></script>
     <script src="~/assets/js/vendor/jquery-3.4.1.min.js"></script>
     <script src="~/assets/js/vendor/popper.js"></script>
@@ -239,7 +178,6 @@
 
     @await Component.InvokeAsync("Notyf");
     @await RenderSectionAsync("Scripts", required: false);
-
 </body>
 
 </html>

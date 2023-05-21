@@ -5,9 +5,6 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <div class="page-header">
     <div class="header-sub-title">
         <nav class="breadcrumb breadcrumb-dash">
@@ -19,7 +16,7 @@
 <div class="card">
     <div class="card-body">
         <div class="row m-b-30">
-            <div class="col-lg-12">
+            <div class="col-lg-8">
                 <div class="d-md-flex">
                     <div class="m-b-10">
                         <select required class="custom-select" id="idrole" name="idrole" style="min-width: 200px;" asp-items="ViewBag.QuyenTruyCap">
@@ -33,12 +30,9 @@
                     </div>
                 </div>
             </div>
-@*            <div class="col-lg-4 text-right">
-                <button class="btn btn-primary">
-                    <i class="anticon anticon-file-excel m-r-5"></i>
-                    <span>Export</span>
-                </button>
-            </div>*@
+            <div class="col-lg-4 text-right">
+                <a class="btn btn-primary" asp-action="Create"><i class="anticon anticon-plus-circle m-r-5"></i><span>Thêm sản phẩm</span></a>
+            </div>
         </div>
         <div class="table-responsive">
             <table class="table table-hover e-commerce-table">
@@ -91,9 +85,9 @@
                                     }
                                 </td>
                                 <td class="text-right">
-                                    <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminAccounts" asp-action="Edit" asp-route-id="@item.AccountId">Edit</a> |
-                                    <a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="AdminAccounts" asp-action="Details" asp-route-id="@item.AccountId">Details</a> |
-                                    <a class="btn btn-danger btn-tone m-r-5" asp-area="Admin" asp-controller="AdminAccounts" asp-action="Delete" asp-route-id="@item.AccountId">Delete</a>
+                                    <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminAccounts" asp-action="Edit" asp-route-id="@item.AccountId">Sửa</a> |
+                                    <a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="AdminAccounts" asp-action="Details" asp-route-id="@item.AccountId">Chi tiết</a> |
+                                    <a class="btn btn-danger btn-tone m-r-5" asp-area="Admin" asp-controller="AdminAccounts" asp-action="Delete" asp-route-id="@item.AccountId">Xóa</a>
                                 </td>
                             </tr>
                         }
