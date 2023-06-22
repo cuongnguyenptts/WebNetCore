@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using WebSellWatch.ModelViews;
 
 namespace WebSellWatch.Models
 {
@@ -199,11 +198,6 @@ namespace WebSellWatch.Models
                     .HasForeignKey(d => d.CustomerId)
                     .HasConstraintName("FK_Orders_Customers");
 
-                entity.HasOne(d => d.Location)
-                    .WithMany(p => p.Orders)
-                    .HasForeignKey(d => d.LocationId)
-                    .HasConstraintName("FK_Orders_Locations");
-
                 entity.HasOne(d => d.TransactStatus)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.TransactStatusId)
@@ -262,6 +256,11 @@ namespace WebSellWatch.Models
                 entity.Property(e => e.DateCreated).HasColumnType("datetime");
 
                 entity.Property(e => e.DateModified).HasColumnType("datetime");
+
+                entity.Property(e => e.MaSp)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("MaSP");
 
                 entity.Property(e => e.MetaDesc).HasMaxLength(255);
 
@@ -323,6 +322,8 @@ namespace WebSellWatch.Models
                 entity.Property(e => e.Phone)
                     .HasMaxLength(10)
                     .IsFixedLength();
+
+                entity.Property(e => e.Sex).HasMaxLength(250);
 
                 entity.Property(e => e.ShipDate).HasColumnType("datetime");
 
@@ -386,7 +387,5 @@ namespace WebSellWatch.Models
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
-
-        public DbSet<WebSellWatch.ModelViews.RegisterViewModel>? RegisterViewModel { get; set; }
     }
 }
