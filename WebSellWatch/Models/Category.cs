@@ -7,7 +7,6 @@ namespace WebSellWatch.Models
     {
         public Category()
         {
-            Products = new HashSet<Product>();
             TinDangs = new HashSet<TinDang>();
         }
 
@@ -26,7 +25,6 @@ namespace WebSellWatch.Models
         public string? Cover { get; set; }
         public string? SchemaMarkup { get; set; }
 
-        public virtual ICollection<Product> Products { get; set; }
         public virtual ICollection<TinDang> TinDangs { get; set; }
     }
 }

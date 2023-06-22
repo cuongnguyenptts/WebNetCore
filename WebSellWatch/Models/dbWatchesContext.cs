@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using WebSellWatch.ModelViews;
 
 namespace WebSellWatch.Models
 {
@@ -29,7 +28,6 @@ namespace WebSellWatch.Models
         public virtual DbSet<Product> Products { get; set; } = null!;
         public virtual DbSet<QuangCao> QuangCaos { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
-        public virtual DbSet<Shipper> Shippers { get; set; } = null!;
         public virtual DbSet<TinDang> TinDangs { get; set; } = null!;
         public virtual DbSet<TransactStatus> TransactStatuses { get; set; } = null!;
 
@@ -89,12 +87,12 @@ namespace WebSellWatch.Models
 
                 entity.Property(e => e.ProductId).HasColumnName("ProductID");
 
-                entity.HasOne(d => d.Attribute)
+                entity.HasOne(d => d.Product)
                     .WithMany(p => p.AttributesPrices)
-                    .HasForeignKey(d => d.AttributeId)
+                    .HasForeignKey(d => d.ProductId)
                     .HasConstraintName("FK_AttributesPrices_Attributes");
 
-                entity.HasOne(d => d.Product)
+                entity.HasOne(d => d.ProductNavigation)
                     .WithMany(p => p.AttributesPrices)
                     .HasForeignKey(d => d.ProductId)
                     .HasConstraintName("FK_AttributesPrices_Products");
@@ -199,11 +197,6 @@ namespace WebSellWatch.Models
                     .HasForeignKey(d => d.CustomerId)
                     .HasConstraintName("FK_Orders_Customers");
 
-                entity.HasOne(d => d.Location)
-                    .WithMany(p => p.Orders)
-                    .HasForeignKey(d => d.LocationId)
-                    .HasConstraintName("FK_Orders_Locations");
-
                 entity.HasOne(d => d.TransactStatus)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.TransactStatusId)
@@ -276,11 +269,6 @@ namespace WebSellWatch.Models
                 entity.Property(e => e.Title).HasMaxLength(255);
 
                 entity.Property(e => e.Video).HasMaxLength(255);
-
-                entity.HasOne(d => d.Cat)
-                    .WithMany(p => p.Products)
-                    .HasForeignKey(d => d.CatId)
-                    .HasConstraintName("FK_Products_Categories");
             });
 
             modelBuilder.Entity<QuangCao>(entity =>
@@ -312,21 +300,6 @@ namespace WebSellWatch.Models
                 entity.Property(e => e.Description).HasMaxLength(255);
 
                 entity.Property(e => e.RolesName).HasMaxLength(255);
-            });
-
-            modelBuilder.Entity<Shipper>(entity =>
-            {
-                entity.Property(e => e.ShipperId).HasColumnName("ShipperID");
-
-                entity.Property(e => e.Company).HasMaxLength(150);
-
-                entity.Property(e => e.Phone)
-                    .HasMaxLength(10)
-                    .IsFixedLength();
-
-                entity.Property(e => e.ShipDate).HasColumnType("datetime");
-
-                entity.Property(e => e.ShipperName).HasMaxLength(150);
             });
 
             modelBuilder.Entity<TinDang>(entity =>
@@ -386,7 +359,5 @@ namespace WebSellWatch.Models
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
-
-        public DbSet<WebSellWatch.ModelViews.RegisterViewModel>? RegisterViewModel { get; set; }
     }
 }

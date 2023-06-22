@@ -11,7 +11,7 @@ namespace WebSellWatch.Models
         public int? Price { get; set; }
         public bool Active { get; set; }
 
-        public virtual Attribute? Attribute { get; set; }
-        public virtual Product? Product { get; set; }
+        public virtual Attribute? Product { get; set; }
+        public virtual Product? ProductNavigation { get; set; }
     }
 }

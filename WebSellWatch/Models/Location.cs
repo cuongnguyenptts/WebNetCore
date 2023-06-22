@@ -8,7 +8,6 @@ namespace WebSellWatch.Models
         public Location()
         {
             Customers = new HashSet<Customer>();
-            Orders = new HashSet<Order>();
         }
 
         public int LocationId { get; set; }
@@ -20,6 +19,5 @@ namespace WebSellWatch.Models
         public string? Type { get; set; }
 
         public virtual ICollection<Customer> Customers { get; set; }
-        public virtual ICollection<Order> Orders { get; set; }
     }
 }
