@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AspNetCoreHero.ToastNotification.Abstractions;
+using AspNetCoreHero.ToastNotification.Notyf;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -10,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using PagedList.Core;
 using WebSellWatch.Helpper;
 using WebSellWatch.Models;
+using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
 
 namespace WebSellWatch.Areas.Admin.Controllers
 {
@@ -25,42 +27,57 @@ namespace WebSellWatch.Areas.Admin.Controllers
         }
 
         // GET: Admin/AdminProducts
-        public async Task<IActionResult> Index(int page=1 ,int CatId =0)
+        public IActionResult Index(int page = 1, int CatID = 0, string SearchText = "")
         {
-            ViewData["DanhMuc"] = new SelectList(_context.Categories, "CatId", "CatName");
-            var pageNumber = 1;
-            var pageSize = 20;
-            List<Product> IsProduct = new List<Product>();
-            if (CatId != 0)
+            var pageNumber = page;
+            var pageSize = 10;
+
+            List<Product> lsProducts = new List<Product>();
+            if (CatID != 0)
             {
-                IsProduct = _context.Products.
-                AsNoTracking().
-                Where(x => x.CatId == CatId).
-                Include(p => p.Cat)
-                .OrderByDescending(x => x.ProductId).ToList();
+                lsProducts = _context.Products
+                .AsNoTracking()
+                .Where(x => x.CatId == CatID)
+                .Include(x => x.Cat)
+                .OrderBy(x => x.ProductId).ToList();
             }
             else
             {
-                IsProduct = _context.Products.
-                AsNoTracking().
-                Include(p => p.Cat)
-                .OrderByDescending(x => x.ProductId).ToList();
+                lsProducts = _context.Products
+                .AsNoTracking()
+                .Include(x => x.Cat)
+                .OrderBy(x => x.ProductId).ToList();
             }
-            PagedList<Product> Models = new PagedList<Product>(IsProduct.AsQueryable(), pageNumber, pageSize);
+
+            if (SearchText != "" && SearchText != null)
+            {
+                lsProducts = _context.Products.AsNoTracking()
+                                  .Include(a => a.Cat)
+                                  .Where(x => x.ProductName.Contains(SearchText))
+                                  .OrderBy(x => x.ProductId)
+                                  .Take(10)
+                                  .ToList();
+            }
+
+
+            PagedList<Product> models = new PagedList<Product>(lsProducts.AsQueryable(), pageNumber, pageSize);
+            ViewBag.CurrentCateID = CatID;
+
             ViewBag.CurrentPage = pageNumber;
-/*            var dbWatchesContext = _context.Products.Include(p => p.Cat);*/
-            return View(Models);
+
+            ViewData["DanhMuc"] = new SelectList(_context.Categories, "CatId", "CatName");
+
+            return View(models);
         }
-        public IActionResult Filtter(int CatId = 0)
+        public IActionResult Filtter(int CatID = 0)
         {
-            var url = $"/Admin/AdminProducts?CatID={CatId}";
-            if (CatId == 0)
+            var url = $"/Admin/AdminProducts?CatID={CatID}";
+            if (CatID == 0)
             {
                 url = $"/Admin/AdminProducts";
             }
             return Json(new { status = "success", redirectUrl = url });
         }
-
 
         // GET: Admin/AdminProducts/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -84,7 +101,8 @@ namespace WebSellWatch.Areas.Admin.Controllers
         // GET: Admin/AdminProducts/Create
         public IActionResult Create()
         {
-            ViewData["CatId"] = new SelectList(_context.Categories, "CatId", "CatId");
+
+            ViewData["DanhMuc"] = new SelectList(_context.Categories, "CatId", "CatName");
             return View();
         }
 
@@ -93,14 +111,15 @@ namespace WebSellWatch.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductId,ProductName,ShortDesc,Description,CatId,Price,Discount,Thumb,Video,DateCreated,DateModified,BestSellers,HomeFlag,Active,Tags,Title,Alias,MetaDesc,MetaKey,UnitsInStock")] Product product, Microsoft.AspNetCore.Http.IFormFile fThumb)
+        public async Task<IActionResult> Create([Bind("ProductId,ProductName,MaSp,ShortDesc,Description,CatId,Price,Discount,Thumb,Video,DateCreated,DateModified,BestSellers,HomeFlag,Active,Tags,Title,Alias,MetaDesc,MetaKey,UnitsInStock")] Product product, Microsoft.AspNetCore.Http.IFormFile fThumb)
         {
             if (ModelState.IsValid)
             {
-                product.ProductName = Utilities.ToTitleCase(product.ProductName);   
-                if(fThumb != null)
+                product.ProductName = Utilities.ToTitleCase(product.ProductName);
+                product.MaSp = Utilities.ToTitleCase(product.MaSp);
+                if (fThumb != null)
                 {
-                    string extension =Path.GetExtension(fThumb.FileName);
+                    string extension = Path.GetExtension(fThumb.FileName);
                     string image = Utilities.SEOUrl(product.ProductName) + extension;
                     product.Thumb = await Utilities.UploadFile(fThumb, @"products", image.ToLower());
                 }
@@ -114,10 +133,10 @@ namespace WebSellWatch.Areas.Admin.Controllers
                 _notifService.Success("Tạo mới thành công!!");
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CatId"] = new SelectList(_context.Categories, "CatId", "CatId", product.CatId);
+
+            ViewData["DanhMuc"] = new SelectList(_context.Categories, "CatId", "CatName", product.CatId);
             return View(product);
         }
-
         // GET: Admin/AdminProducts/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -131,7 +150,7 @@ namespace WebSellWatch.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            ViewData["CatId"] = new SelectList(_context.Categories, "CatId", "CatId", product.CatId);
+            ViewData["DanhMuc"] = new SelectList(_context.Categories, "CatId", "CatName", product.CatId);
             return View(product);
         }
 
@@ -140,7 +159,7 @@ namespace WebSellWatch.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductId,ProductName,ShortDesc,Description,CatId,Price,Discount,Thumb,Video,DateCreated,DateModified,BestSellers,HomeFlag,Active,Tags,Title,Alias,MetaDesc,MetaKey,UnitsInStock")] Product product, Microsoft.AspNetCore.Http.IFormFile fThumb)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductId,ProductName,MaSp,ShortDesc,Description,CatId,Price,Discount,Thumb,Video,DateCreated,DateModified,BestSellers,HomeFlag,Active,Tags,Title,Alias,MetaDesc,MetaKey,UnitsInStock")] Product product, Microsoft.AspNetCore.Http.IFormFile fThumb)
         {
             if (id != product.ProductId)
             {
@@ -152,6 +171,7 @@ namespace WebSellWatch.Areas.Admin.Controllers
                 try
                 {
                     product.ProductName = Utilities.ToTitleCase(product.ProductName);
+                    product.MaSp = Utilities.ToTitleCase(product.MaSp);
                     if (fThumb != null)
                     {
                         string extension = Path.GetExtension(fThumb.FileName);
@@ -161,7 +181,6 @@ namespace WebSellWatch.Areas.Admin.Controllers
                     if (string.IsNullOrEmpty(product.Thumb)) product.Thumb = "default.jpg";
                     product.Alias = Utilities.SEOUrl(product.ProductName);
                     product.DateModified = DateTime.Now;
-                    product.DateCreated = DateTime.Now;
 
                     _context.Update(product);
                     _notifService.Success("Cập nhật thành công");
@@ -180,7 +199,7 @@ namespace WebSellWatch.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CatId"] = new SelectList(_context.Categories, "CatId", "CatId", product.CatId);
+            ViewData["DanhMuc"] = new SelectList(_context.Categories, "CatId", "CatName", product.CatId);
             return View(product);
         }
 
@@ -208,16 +227,8 @@ namespace WebSellWatch.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Products == null)
-            {
-                return Problem("Entity set 'dbWatchesContext.Products'  is null.");
-            }
             var product = await _context.Products.FindAsync(id);
-            if (product != null)
-            {
-                _context.Products.Remove(product);
-            }
-            
+            _context.Products.Remove(product);
             await _context.SaveChangesAsync();
             _notifService.Success("Xóa thành công");
             return RedirectToAction(nameof(Index));
@@ -225,7 +236,7 @@ namespace WebSellWatch.Areas.Admin.Controllers
 
         private bool ProductExists(int id)
         {
-          return (_context.Products?.Any(e => e.ProductId == id)).GetValueOrDefault();
+            return (_context.Products?.Any(e => e.ProductId == id)).GetValueOrDefault();
         }
     }
 }

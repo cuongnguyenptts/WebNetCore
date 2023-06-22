@@ -25,9 +25,9 @@ namespace WebSellWatch.Areas.Admin.Controllers
         // GET: Admin/AdminRoles
         public async Task<IActionResult> Index()
         {
-              return _context.Roles != null ? 
-                          View(await _context.Roles.ToListAsync()) :
-                          Problem("Entity set 'dbWatchesContext.Roles'  is null.");
+            return _context.Roles != null ?
+                        View(await _context.Roles.ToListAsync()) :
+                        Problem("Entity set 'dbWatchesContext.Roles'  is null.");
         }
 
         // GET: Admin/AdminRoles/Details/5
@@ -156,7 +156,7 @@ namespace WebSellWatch.Areas.Admin.Controllers
             {
                 _context.Roles.Remove(role);
             }
-            
+
             await _context.SaveChangesAsync();
             _notifService.Success("Xóa thành công");
             return RedirectToAction(nameof(Index));
@@ -164,7 +164,7 @@ namespace WebSellWatch.Areas.Admin.Controllers
 
         private bool RoleExists(int id)
         {
-          return (_context.Roles?.Any(e => e.RolesId == id)).GetValueOrDefault();
+            return (_context.Roles?.Any(e => e.RolesId == id)).GetValueOrDefault();
         }
     }
 }

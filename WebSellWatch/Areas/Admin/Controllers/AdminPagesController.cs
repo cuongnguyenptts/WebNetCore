@@ -93,7 +93,7 @@ namespace WebSellWatch.Areas.Admin.Controllers
                 _context.Add(page);
                 _notyfService.Success("Thêm mới thành công");
                 await _context.SaveChangesAsync();
-      
+
                 return RedirectToAction(nameof(Index));
             }
             return View(page);
@@ -186,7 +186,7 @@ namespace WebSellWatch.Areas.Admin.Controllers
             _context.Pages.Remove(page);
             _notyfService.Success("Xóa thành công");
             await _context.SaveChangesAsync();
-   
+
             return RedirectToAction(nameof(Index));
         }
 

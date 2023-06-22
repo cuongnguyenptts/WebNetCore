@@ -177,7 +177,7 @@ namespace WebSellWatch.Areas.Admin.Controllers
             _context.Categories.Remove(category);
             _notyfService.Success("Xóa thành công");
             await _context.SaveChangesAsync();
-  
+
             return RedirectToAction(nameof(Index));
         }
 

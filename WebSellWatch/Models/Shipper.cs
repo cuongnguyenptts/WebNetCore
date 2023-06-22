@@ -10,5 +10,6 @@ namespace WebSellWatch.Models
         public string? Phone { get; set; }
         public string? Company { get; set; }
         public DateTime? ShipDate { get; set; }
+        public string? Sex { get; set; }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PagedList.Core;
+using System.Data;
 using WebSellWatch.Models;
 
 
@@ -14,26 +16,55 @@ namespace WebSellWatch.Controllers
             _context = context;
         }
         [Route("shop.html", Name = ("ShopProduct"))]
-        public IActionResult Index(int? page)
+        public IActionResult Index(int? page, int CatID = 0, string searchText = "")
         {
             try
             {
-                var pageNumber = page == null || page <= 0 ? 1 : page.Value;
-                var pageSize = 10;
-                var lsTinDangs = _context.Products
-                    .AsNoTracking()
-                    .OrderBy(x => x.DateCreated);
-                PagedList<Product> models = new PagedList<Product>(lsTinDangs, pageNumber, pageSize);
+                var pageNumber = (page ?? 1);
+                var pageSize = 9;
 
+                List<Product> lsProducts = new List<Product>();
+
+                if (searchText != "" && searchText != null)
+                {
+                    lsProducts = _context.Products.AsNoTracking()
+                                      .Include(a => a.Cat)
+                                      .Where(x => x.ProductName.Contains(searchText))
+                                      .OrderByDescending(x => x.ProductName)
+                                      .Take(pageSize)
+                                      .ToList();
+                }
+                else if (CatID != 0)
+                {
+                    lsProducts = _context.Products.AsNoTracking()
+                    .Include(a => a.Cat)
+                    .OrderByDescending(x => x.CatId)
+                    .Take(pageSize)
+                    .ToList();
+                }
+                else
+                {
+                    lsProducts = _context.Products
+                    .AsNoTracking()
+                    .Include(x => x.Cat)
+                    .OrderBy(x => x.ProductId).ToList();
+                }
+
+
+                PagedList<Product> models = new PagedList<Product>(lsProducts.AsQueryable(), pageNumber, pageSize);
+                ViewBag.Count = models.Count;
+                ViewBag.CurrentCateID = CatID;
+                ViewBag.SearchText = searchText;
                 ViewBag.CurrentPage = pageNumber;
+
+                ViewData["DanhMuc"] = new SelectList(_context.Categories, "CatId", "CatName");
+
                 return View(models);
             }
             catch
             {
                 return RedirectToAction("Index", "Home");
             }
-
-
         }
         [Route("/{Alias}", Name = "ListProductDeltails")]
         public IActionResult List(string Alias, int page = 1)

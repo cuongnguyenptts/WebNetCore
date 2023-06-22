@@ -40,10 +40,6 @@ namespace WebSellWatch.Controllers
                 productHome.lsProducts = lsProducts.Where(x => x.CatId == item.CatId).ToList();
                 lsProductViews.Add(productHome);
 
-                var quangcao = _context.QuangCaos
-                    .AsNoTracking()
-                    .FirstOrDefault(x => x.Active == true);
-                
 
                 var TinTuc = _context.TinDangs
                     .AsNoTracking()
@@ -52,7 +48,6 @@ namespace WebSellWatch.Controllers
                     .Take(3)
                     .ToList();
                 model.Products = lsProductViews;
-                model.quangcao = quangcao;
                 model.TinTucs = TinTuc;
                 ViewBag.AllProducts = lsProducts;
             }
@@ -66,14 +61,14 @@ namespace WebSellWatch.Controllers
         }
 
         public IActionResult Privacy()
-            {
-                return View();
-            }
-
-            [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-            public IActionResult Error()
-            {
-                return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-            }
+        {
+            return View();
         }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+    }
 }

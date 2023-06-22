@@ -26,7 +26,7 @@ namespace WebSellWatch.Areas.Admin.Controllers
         }
 
         // GET: Admin/AdminAccounts
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int RolesId = 0)
         {
             ViewData["QuyenTruyCap"] = new SelectList(_context.Roles, "RolesId", "RolesName");
             List<SelectListItem> IsTrangThai = new List<SelectListItem>();
@@ -35,10 +35,20 @@ namespace WebSellWatch.Areas.Admin.Controllers
             ViewData["IsTrangThai"] = IsTrangThai;
 
             var dbWatchesContext = _context.Accounts.Include(a => a.Roles);
+
             return View(await dbWatchesContext.ToListAsync());
         }
 
         // GET: Admin/AdminAccounts/Details/5
+        public IActionResult Filtter(int RolesId = 0)
+        {
+            var url = $"/Admin/AdminAccounts?RolesId={RolesId}";
+            if (RolesId == 0)
+            {
+                url = $"/Admin/AdminAccounts";
+            }
+            return Json(new { status = "success", redirectUrl = url });
+        }
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Accounts == null)
@@ -76,7 +86,7 @@ namespace WebSellWatch.Areas.Admin.Controllers
                 string salt = Utilities.GetRandomKey();
                 account.Salt = salt;
                 account.Password = (account.Phone + salt.Trim()).ToMD5();
-                account.CreateDate = DateTime.Now; 
+                account.CreateDate = DateTime.Now;
 
                 _context.Add(account);
                 await _context.SaveChangesAsync();
@@ -197,14 +207,14 @@ namespace WebSellWatch.Areas.Admin.Controllers
             {
                 _context.Accounts.Remove(account);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool AccountExists(int id)
         {
-          return (_context.Accounts?.Any(e => e.AccountId == id)).GetValueOrDefault();
+            return (_context.Accounts?.Any(e => e.AccountId == id)).GetValueOrDefault();
         }
     }
 }

@@ -52,7 +52,7 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="form-elements.html">Bán Hàng</a>
+                        <a asp-area="Admin" asp-controller="AdminOrders" asp-action="TotalSale">Tổng doanh số</a>
                     </li>
                     <li>
                         <a href="form-layouts.html">Mua Hàng</a>
@@ -80,9 +80,6 @@
                     <li>
                         <a asp-action="Index" asp-controller="AdminRoles" asp-area="Admin">Quản lý quyền truy cập</a>
                     </li>
-                    <li>
-                        <a href="data-table.html">Quản lý Tỉnh/Thành</a>
-                    </li>
 
                 </ul>
             </li>
@@ -102,15 +99,15 @@
                     <span class="title">Quản lý Pages</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a asp-area="Admin" asp-controller="" asp-action="Index">
-                    <span class="icon-holder">
-                        <i class="anticon anticon-lock"></i>
-                    </span>
-                    <span class="title">Quản lý Shipper</span>
-                </a>
-            </li>
+            @*            <li class="nav-item">
+            <a asp-area="Admin" asp-controller="" asp-action="Index">
+            <span class="icon-holder">
+            <i class="anticon anticon-lock"></i>
+            </span>
+            <span class="title">Quản lý Shipper</span>
+            </a>
+            </li>*@
         </ul>
-        
+
     </div>
 </div>

@@ -126,7 +126,7 @@ namespace WebSellWatch.Controllers
                         _notyfService.Success("Đăng ký thành công");
                         return RedirectToAction("Dashboard", "Accounts");
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         return RedirectToAction("DangkyTaiKhoan", "Accounts");
                     }
@@ -170,8 +170,8 @@ namespace WebSellWatch.Controllers
                     string pass = (customer.Password + khachhang.Salt.Trim()).ToMD5();
                     if (khachhang.Password != pass)
                     {
-                        _notyfService.Success("Thông tin đăng nhập chưa chính xác");
                         return View(customer);
+                        /*    _notyfService.Error("Thông tin đăng nhập chưa chính xác");*/
                     }
                     //kiem tra xem account co bi disable hay khong
 
@@ -193,10 +193,11 @@ namespace WebSellWatch.Controllers
                     ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "login");
                     ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
                     await HttpContext.SignInAsync(claimsPrincipal);
-                    _notyfService.Success("Đăng nhập thành công");
+
                     if (string.IsNullOrEmpty(returnUrl))
                     {
                         return RedirectToAction("Dashboard", "Accounts");
+                        _notyfService.Success("Đăng nhập thành công");
                     }
                     else
                     {

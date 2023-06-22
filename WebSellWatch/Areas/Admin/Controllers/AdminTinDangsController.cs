@@ -197,5 +197,5 @@ namespace WebSellWatch.Areas.Admin.Controllers
         {
             return _context.TinDangs.Any(e => e.PostId == id);
         }
-    }  
+    }
 }

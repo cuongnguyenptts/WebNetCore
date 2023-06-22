@@ -31,7 +31,7 @@
                         <th>ID</th>
                         <th>Tiêu đề</th>
                         <th>Ngày tạo</th>
-@*                        <th>isHOT</th>
+                        @*                        <th>isHOT</th>
                         <th>isNewFeed</th>*@
                         <th>Trạng thái</th>
                         <th>#</th>
@@ -46,44 +46,44 @@
                                 <td>@item.PostId</td>
                                 <td>@item.Title</td>
                                 <td>@item.CreatedDate</td>
- @*                               <td>
-                                    @if (item.IsNewfeed == true)
-                                    {
+                                @*                               <td>
+                        @if (item.IsNewfeed == true)
+                        {
 
 
-                                        <div class="d-flex align-items-center">
-                                            <div class="badge badge-success badge-dot m-r-10"></div>
-                                            <div>IsNewFeed</div>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="d-flex align-items-center">
-                                            <div class="badge badge-success badge-dot m-r-10"></div>
-                                            <div>-</div>
-                                        </div>
-                                    }
-                                </td>s
-                                <td>
-                                    @if (item.IsHot == true)
-                                    {
+                        <div class="d-flex align-items-center">
+                        <div class="badge badge-success badge-dot m-r-10"></div>
+                        <div>IsNewFeed</div>
+                        </div>
+                        }
+                        else
+                        {
+                        <div class="d-flex align-items-center">
+                        <div class="badge badge-success badge-dot m-r-10"></div>
+                        <div>-</div>
+                        </div>
+                        }
+                        </td>s
+                        <td>
+                        @if (item.IsHot == true)
+                        {
 
 
-                                        <div class="d-flex align-items-center">
-                                            <div class="badge badge-success badge-dot m-r-10"></div>
-                                            <div>Hot</div>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="d-flex align-items-center">
-                                            <div class="badge badge-success badge-dot m-r-10"></div>
-                                            <div>-</div>
-                                        </div>
-                                    }
+                        <div class="d-flex align-items-center">
+                        <div class="badge badge-success badge-dot m-r-10"></div>
+                        <div>Hot</div>
+                        </div>
+                        }
+                        else
+                        {
+                        <div class="d-flex align-items-center">
+                        <div class="badge badge-success badge-dot m-r-10"></div>
+                        <div>-</div>
+                        </div>
+                        }
 
-                                </td>
-*@
+                        </td>
+                        *@
 
                                 <td>
                                     @if (item.Published == true)
@@ -98,7 +98,7 @@
                                     else
                                     {
                                         <div class="d-flex align-items-center">
-                                            <div class="badge badge-success badge-dot m-r-10"></div>
+                                            <div class="badge badge-danger badge-dot m-r-10"></div>
                                             <div>Non-Public</div>
                                         </div>
                                     }
@@ -118,7 +118,7 @@
             </table>
             <div aria-label="Page navigation example">
                 <ul class="pagination">
-                    <pager class="pager-container"  asp-area="Admin" asp-controller="AdminTinDangs" asp-action="Index" />
+                    <pager class="pager-container" asp-area="Admin" asp-controller="AdminTinDangs" asp-action="Index" />
                 </ul>
             </div>
         </div>

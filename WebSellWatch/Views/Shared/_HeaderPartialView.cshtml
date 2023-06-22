@@ -70,7 +70,7 @@
                                 <ul class="d-flex">
                                     <li><a asp-controller="Home" asp-action="Index">Trang Chủ</a> </li>
                                     <li><a asp-controller="Product" asp-action="Index">Shop</a></li>
-                                    <li> <a href="/page/huong-dan-mua-hang">Hướng dẫn mua hàng</a></li>
+                                    <li> <a asp-controller="Page" asp-action="Details">Hướng dẫn mua hàng</a></li>
                                     <li>
                                         <a asp-controller="Blog" asp-action="Index">Tin Tức</a>
                                     </li>
@@ -87,26 +87,28 @@
 
                                 </li>
                                 <li class="account_link">
-                                 
+
                                     <a href="#"><i class="icon-user icons"></i></a>
                                     <ul class="dropdown_account_link">
-                                       
-                                    @if (!User.Identity.IsAuthenticated)
-                                    {
+
+                                        @if (!User.Identity.IsAuthenticated)
+                                        {
                                             <li><a href="/dang-nhap.html">Đăng Nhập</a></li>
                                             <li><a href="/dang-ky.html">Đăng Kí</a></li>
 
-                                    }else{
+                                        }
+                                        else
+                                        {
                                             <li><a href="/tai-khoan-cua-toi.html">Tài khoản của tôi</a></li>
                                             <li><a href="dang-xuat.html">Đăng xuất</a></li>
 
-                                    }
+                                        }
                                     </ul>
                                 </li>
-@*                                <li>
-                                    <a href="#"><i class="icon-heart icons"></i></a> <span class="item_count">2</span>
+                                @*                                <li>
+                                <a href="#"><i class="icon-heart icons"></i></a> <span class="item_count">2</span>
                                 </li>*@
-                         
+
                             </ul>
                         </div>
                     </div>

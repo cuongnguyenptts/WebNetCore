@@ -21,6 +21,7 @@
 
 <form asp-controller="AdminTinDangs" asp-action="Edit" asp-route-id="@Model.PostId" method="post" enctype="multipart/form-data">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Thumb" />
     <input type="hidden" asp-for="PostId" />
     <input type="hidden" asp-for="CreatedDate" />
     <div class="page-header no-gutters has-tab">
