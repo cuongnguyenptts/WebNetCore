@@ -38,7 +38,7 @@ namespace WebSellWatch.Areas.Admin.Controllers
                 lsProducts = _context.Products
                 .AsNoTracking()
                 .Where(x => x.CatId == CatID)
-                .Include(x => x.)
+                .Include(x => x.Cat)
                 .OrderBy(x => x.ProductId).ToList();
             }
             else
