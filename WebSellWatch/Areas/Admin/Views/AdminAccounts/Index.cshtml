@@ -1,4 +1,6 @@
-﻿@model IEnumerable<WebSellWatch.Models.Account>
+﻿@using PagedList.Core.Mvc
+@model PagedList.Core.IPagedList<WebSellWatch.Models.Account>
+
 
 @{
     ViewData["Title"] = "Tài khoản Index";
@@ -20,18 +22,18 @@
                 <div class="d-md-flex">
                     <div class="m-b-10">
                         <select required class="custom-select" id="idrole" name="idrole" style="min-width: 200px;" asp-items="ViewBag.QuyenTruyCap">
-                            <option value="0" disabled selected>Chọn quyền truy cập</option>
+                            <option value="0" id="txtCatID" name="txtRolesId" disabled selected>Chọn quyền truy cập</option>
                         </select>
                     </div>
-                    <div class="m-b-10">
-                        <select required class="custom-select" id="idstatus" name="idstatus" style="min-width: 200px;" asp-items="ViewBag.IsTrangThai">
-                            <option value="" disabled selected>Trang thai</option>
-                        </select>
-                    </div>
+                    @*                    <div class="m-b-10">
+                    <select required class="custom-select" id="idstatus" name="idstatus" style="min-width: 200px;" asp-items="ViewBag.IsTrangThai">
+                    <option value="" disabled selected>Trang thai</option>
+                    </select>
+                    </div>*@
                 </div>
             </div>
             <div class="col-lg-4 text-right">
-                <a class="btn btn-primary" asp-action="Create"><i class="anticon anticon-plus-circle m-r-5"></i><span>Thêm sản phẩm</span></a>
+                <a class="btn btn-primary" asp-action="Create"><i class="anticon anticon-plus-circle m-r-5"></i><span>Thêm tài khoản</span></a>
             </div>
         </div>
         <div class="table-responsive">
@@ -40,7 +42,7 @@
                     <tr>
 
                         <th>ID</th>
-                        <th>FullName</th>
+                        <th>Họ và tên</th>
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Lần đăng nhập cuối</th>
@@ -70,17 +72,18 @@
                                     @item.Roles.Description
                                 </td>
                                 <td>
-                                    @if(item.Active){
+                                    @if (item.Active)
+                                    {
                                         <div class="d-flex align-items-center">
                                             <div class="badge badge-success badge-dot m-r-10"></div>
-                                            <div>Active</div>
+                                            <div>Hoạt động</div>
                                         </div>
                                     }
                                     else
                                     {
                                         <div class="d-flex align-items-center">
-                                            <div class="badge badge-success badge-dot m-r-10"></div>
-                                            <div>Block</div>
+                                            <div class="badge badge-danger badge-dot m-r-10"></div>
+                                            <div>Khóa</div>
                                         </div>
                                     }
                                 </td>
@@ -95,6 +98,61 @@
 
                 </tbody>
             </table>
+            <div aria-label="Page navigation example">
+                <ul class="pagination">
+                    <pager class="pager-container" list="@Model" asp-area="Admin" asp-controller="AdminAccounts" asp-action="Index"></pager>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            jQuery("#txtRolesId").change(function () {
+                var rolesId = jQuery(this).children(":selected").attr("value");
+                rolesId = parseFloat(rolesId);
+                $('#txtRolesId option')
+                    .removeAttr('selected');
+                $("#txtRolesId > [value=" + rolesId + "]").attr("selected", "true");
+                $.ajax({
+                    url: '/Admin/AdminAccounts/Filtter',
+                    datatype: "json",
+                    type: "GET",
+                    data: {
+                        RolesId: rolesId
+                    },
+                    async: true,
+                    success: function (results) {
+                        if (results.status == "success") {
+                            window.location.href = results.redirectUrl;
+                        }
+                    },
+                    error: function (xhr) {
+                        alert('error');
+                    }
+                });
+            });
+
+            $("#keyword").keyup(function () {
+                var strkeyword = $('#keyword').val();
+                $.ajax({
+                    url: '/Admin/Search/FindProduct/',
+                    datatype: "json",
+                    type: "POST",
+                    data: { keyword: strkeyword },
+                    async: true,
+                    success: function (results) {
+                        $("#records_table").html("");
+                        $("#records_table").html(results);
+                    },
+                    error: function (xhr) {
+                        alert('error');
+                    }
+                });
+            });
+        });
+    </script>
+
+}
+

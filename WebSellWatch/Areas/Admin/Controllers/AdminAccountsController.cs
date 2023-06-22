@@ -6,6 +6,7 @@ using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using PagedList.Core;
 using WebSellWatch.Areas.Admin.Models;
 using WebSellWatch.Extension;
 using WebSellWatch.Helpper;
@@ -26,19 +27,32 @@ namespace WebSellWatch.Areas.Admin.Controllers
         }
 
         // GET: Admin/AdminAccounts
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int RolesId = 0, int page = 1)
         {
+            var pageNumber = page;
+            var pageSize = 10;
             ViewData["QuyenTruyCap"] = new SelectList(_context.Roles, "RolesId", "RolesName");
-            List<SelectListItem> IsTrangThai = new List<SelectListItem>();
-            IsTrangThai.Add(new SelectListItem() { Text = "Active", Value = "1" });
-            IsTrangThai.Add(new SelectListItem() { Text = "Block", Value = "0" });
-            ViewData["IsTrangThai"] = IsTrangThai;
+            /*            List<SelectListItem> IsTrangThai = new List<SelectListItem>();
+                        IsTrangThai.Add(new SelectListItem() { Text = "Active", Value = "1" });
+                        IsTrangThai.Add(new SelectListItem() { Text = "Block", Value = "0" });*/
+            /*            ViewData["IsTrangThai"] = IsTrangThai;*/
 
-            var dbWatchesContext = _context.Accounts.Include(a => a.Roles);
-            return View(await dbWatchesContext.ToListAsync());
+            var dbWatchesContext = _context.Accounts.Include(a => a.Roles).Take(pageSize).ToList();
+            PagedList<Account> models = new PagedList<Account>(dbWatchesContext.AsQueryable(), pageNumber, pageSize);
+
+            return View(models);
         }
 
         // GET: Admin/AdminAccounts/Details/5
+        public IActionResult Filtter(int RolesId = 0)
+        {
+            var url = $"/Admin/AdminAccounts?RolesId={RolesId}";
+            if (RolesId == 0)
+            {
+                url = $"/Admin/AdminAccounts";
+            }
+            return Json(new { status = "success", redirectUrl = url });
+        }
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Accounts == null)
@@ -76,7 +90,7 @@ namespace WebSellWatch.Areas.Admin.Controllers
                 string salt = Utilities.GetRandomKey();
                 account.Salt = salt;
                 account.Password = (account.Phone + salt.Trim()).ToMD5();
-                account.CreateDate = DateTime.Now; 
+                account.CreateDate = DateTime.Now;
 
                 _context.Add(account);
                 await _context.SaveChangesAsync();
@@ -197,14 +211,14 @@ namespace WebSellWatch.Areas.Admin.Controllers
             {
                 _context.Accounts.Remove(account);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool AccountExists(int id)
         {
-          return (_context.Accounts?.Any(e => e.AccountId == id)).GetValueOrDefault();
+            return (_context.Accounts?.Any(e => e.AccountId == id)).GetValueOrDefault();
         }
     }
 }

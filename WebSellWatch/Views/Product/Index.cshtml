@@ -1,5 +1,6 @@
-﻿@model PagedList.Core.IPagedList<WebSellWatch.Models.Product>
-@using PagedList.Core.Mvc
+﻿@using PagedList.Core.Mvc;
+
+@model PagedList.Core.IPagedList<WebSellWatch.Models.Product>
 @{
     ViewData["TiTle"] = "Shop - " + ViewBag.CurrentPage;
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -15,17 +16,24 @@
                 <!--sidebar widget start-->
                 <aside class="sidebar_widget">
                     <div class="widget_inner">
+                        <div class="widget_list widget_filter">
+                        </div>
                         <div class="widget_list widget_categories">
                             <h2>Danh sách sản phẩm</h2>
+                            <div class="filter__list slider_range">
+                                <form asp-controller="Product" asp-action="Index">
+                                    <i class="prefix-icon anticon anticon-search opacity-04"></i>
+                                    <input id="SearchText" name="SearchText" type="text" class="form-control" placeholder="Tìm kiếm sản phẩm">
+                                </form>
+                            </div>
                             <ul>
                                 <li class="widget_sub_categories">
                                     <a href="javascript:void(0)" data-toggle="collapse" data-target="#men">Hãng</a>
                                     <ul class="widget_dropdown_categories collapse show" id="men">
-                                        <li><a href="#">Patek Philippe<span>20</span></a></li>
-                                        <li><a href="#">TAG Heuer<span>5</span></a></li>
-                                        <li><a href="#">Rolex <span>10</span></a></li>
-                                        <li><a href="#"> Hublot <span>30</span></a></li>
-                                        <li><a href="#"> CALVIN KLEIN <span>150</span></a></li>
+@*                                        @foreach (var item in Model)
+                                        {
+                                            <li><a href="#">@item.Cat.CatName<span>@Model.Count()</span></a></li>
+                                        }*@
                                     </ul>
                                 </li>
 
@@ -34,10 +42,10 @@
                         <div class="widget_list widget_filter">
                             <h2>Giá</h2>
                             <div class="filter__list slider_range">
-                                <h3>Giá</h3>
+
                                 <form action="#">
                                     <div id="slider-range"></div>
-    
+
                                     <input type="text" name="text" id="amount" />
                                 </form>
                             </div>
@@ -59,11 +67,11 @@
                                     <li>
                                         <input type="checkbox">
                                         <span class="checkmark color4"></span>
-                                    </li>                              
+                                    </li>
                                 </ul>
                             </div>
                         </div>
-                       
+
                     </div>
                 </aside>
                 <!--sidebar widget end-->
@@ -81,21 +89,9 @@
                 <!--shop toolbar start-->
                 <div class="shop_toolbar_wrapper d-flex justify-content-between align-items-center">
                     <div class="page_amount">
-                        <p><span>50</span> Sản phẩm được tìm thấy</p>
+                        <p><span>@Model.Count()</span> Sản phẩm được tìm thấy</p>
                     </div>
                     <div class=" sorting_by d-flex align-items-center">
-                        <span>SORT BY :</span>
-                        <form class="select_option" action="#">
-                            <select name="orderby" id="short">
-
-                                <option selected value="1">NAME         </option>
-                                <option value="2">NAME  4</option>
-                                <option value="3">NAME  5</option>
-                                <option value="4">NAME  6</option>
-                                <option value="5">NAME  7</option>
-                                <option value="6">NAME  8</option>
-                            </select>
-                        </form>
                     </div>
                     <div class="toolbar_btn_wrapper d-flex align-items-center">
                         <div class="shop_toolbar_btn">
@@ -153,22 +149,19 @@
                                         <div class="price_box">
                                             <span class="current_price">@item.Price</span>
                                         </div>
-                                        <div class="add_to_cart">
-                                            <a class="btn btn-primary" href="#" data-tippy="Add To Cart" data-tippy-inertia="true" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-placement="top">Add To Cart</a>
-                                        </div>
                                     </div>
                                     <div class="product_list_content">
                                         <h4 class="product_name"><a href="@url">@item.ProductName</a></h4>
                                         <p><a href="#">shows</a></p>
                                         <div class="price_box">
-                                            <span class="current_price">@item.Price</span>
+                                            <span class="current_price">@item.Price.Value.ToString("#,##0") VNĐ</span>
+                                            @if (item.Discount > 0)
+                                            {
+                                                <span class="old_price">@item.Discount.Value.ToString("#,##0") VNĐ</span>
+                                            }
                                         </div>
                                         <div class="product_desc">
                                             <p>@item.ShortDesc</p>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a asp-controller="ShoppingCar" asp-action="AddToCart" class="add-to-cart btn btn-primary" data-tippy="Add To Cart" data-tippy-inertia="true" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-placement="top">Add To Cart</a>
-                                                <input hidden asp-for="@item.ProductId"/>                                      
                                         </div>
                                     </div>
                                 </div>
@@ -176,12 +169,16 @@
                         }
                     }
                 </div>
+
                 <div class="pagination_style pagination justify-content-center">
                     <ul class="d-flex">
+
                         <li><a href="#"> << </a></li>
-                        <li><a class="current" list="@Model" options="@PagedListRenderOptions.Bootstrap4PageNumbersOnly" asp-area="" asp-controller="Product" asp-action="Index">1</a></li>
-                        <li><a class="#" >2</a></li>
-                        <li><a class="#">3</a></li>
+                        <li>
+                            <a class="current" List="@Model" options="@PagedListRenderOptions.Bootstrap4PageNumbersOnly"
+                               asp-controller="Product" asp-action="Index">1</a>
+                        </li>
+                        <li><a class="#">2</a></li>
                         <li><a href="#">>></a></li>
                     </ul>
                 </div>
@@ -265,7 +262,7 @@
                     }
                 }
 
-                   
+
                 <!--shop toolbar end-->
                 <!--shop wrapper end-->
             </div>
@@ -302,7 +299,7 @@
 <!--newsletter section end-->
 <!--shop  area end-->
 @section Scripts{
-@*    <script>
+    @*    <script>
         $(document).ready(function () {
             $(function () {
                 $(".add-to-cart").click(function () {

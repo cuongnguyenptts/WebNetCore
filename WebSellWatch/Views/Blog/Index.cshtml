@@ -35,9 +35,9 @@
             <button data-filter=".community">Cộng Đồng</button>
         </div>
         <div class="row blog_page_gallery">
-            @if(Model != null )
+            @if (Model != null)
             {
-                foreach(var item in Model)
+                foreach (var item in Model)
                 {
                     string url = $"/tintuc/{item.Alias}-{item.PostId}.html";
                     <div class="col-lg-4 col-md-6 col-sm-6 gird_item nspiration community">
@@ -60,7 +60,7 @@
                     </div>
                 }
             }
-           
+
 
         </div>
         <div class="pagination_style pagination blog_pagination justify-content-center">

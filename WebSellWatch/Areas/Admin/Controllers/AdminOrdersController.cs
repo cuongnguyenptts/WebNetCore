@@ -25,22 +25,32 @@ namespace WebSellWatch.Areas.Admin.Controllers
 
         // GET: Admin/AdminOrders
 
-        public IActionResult Index(int? page)
+        public IActionResult Index(int? page, int? TransactStatusId, string search = "")
         {
             var pageNumber = page == null || page <= 0 ? 1 : page.Value;
-            var pageSize = 20;
+            var pageSize = 10;
+            TransactStatusId = TransactStatusId ?? 0;
+            var status = _context.TransactStatuses.ToList();
+            status.Insert(0, new TransactStatus { TransactStatusId = 0, Status = "Chọn trạng thái" });
+            ViewBag.TransactStatusId = new SelectList(status, "TransactStatusId", "Status", TransactStatusId);
             var Orders = _context.Orders.Include(o => o.Customer).Include(o => o.TransactStatus)
+                /*               .Where(x=> x.TransactStatusId == TransactStatusId )*/
                 .AsNoTracking()
                 .OrderBy(x => x.OrderDate);
-            PagedList<Order> models = new PagedList<Order>(Orders, pageNumber, pageSize);
-
+            PagedList<Order> models = new PagedList<Order>(Orders.AsQueryable(), pageNumber, pageSize);
+            ViewBag.CurrentTransactStatusId = TransactStatusId;
             ViewBag.CurrentPage = pageNumber;
-
-
-
             return View(models);
         }
-
+        public IActionResult Filtter(int TransactStatusId = 0)
+        {
+            var url = $"/Admin/AdminOrders?TransactStatusId={TransactStatusId}";
+            if (TransactStatusId == 0)
+            {
+                url = $"/Admin/AdminOrders";
+            }
+            return Json(new { status = "success", redirectUrl = url });
+        }
         // GET: Admin/AdminOrders/Details/5
         public async Task<IActionResult> Details(int? id)
         {
