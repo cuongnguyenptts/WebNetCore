@@ -13,13 +13,23 @@
                         <div class="avatar avatar-icon avatar-lg avatar-blue">
                             <i class="anticon anticon-dollar"></i>
                         </div>
-                        <div class="m-l-15">
-                            @{
-                                decimal tong = decimal.Parse(ViewBag.ThongkedoangThu.ToString());
-                            }
-                            <h2 class="m-b-0">@tong.ToString("#,##0") VNĐ</h2>
-                            <p class="m-b-0 text-muted">Tổng doanh thu</p>
-                        </div>
+                        @if (ViewBag.ThongkedoangThu > 0)
+                        {
+                            <div class="m-l-15">
+                                @{
+                                    decimal tong = decimal.Parse(ViewBag.ThongkedoangThu.ToString());
+                                }
+                                <h2 class="m-b-0">@tong.ToString("#,##0") VNĐ</h2>
+                                <p class="m-b-0 text-muted">Tổng doanh thu</p>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="m-l-15">
+                                <h2 class="m-b-0">0 VNĐ</h2>
+                                <p class="m-b-0 text-muted">Tổng doanh thu</p>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

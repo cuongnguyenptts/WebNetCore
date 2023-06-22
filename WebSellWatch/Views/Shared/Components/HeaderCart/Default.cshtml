@@ -46,6 +46,7 @@
         <div class="cart_button">
             <a href="cart.html"><i class="fa fa-shopping-cart"></i> Xem Giỏ Hàng</a>
         </div>
+
         @if (User.Identity.IsAuthenticated)
         {
             <div class="cart_button">
@@ -55,7 +56,7 @@
         else
         {
             <div class="cart_button">
-                <a href ="/dang-nhap.html?returnUrl=/checkout.html"><i class="fa fa-sign-in"></i> Thanh toán</a>
+                <a href="/dang-nhap.html?returnUrl=/checkout.html"><i class="fa fa-sign-in"></i> Thanh toán</a>
             </div>
 
         }

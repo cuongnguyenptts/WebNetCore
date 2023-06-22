@@ -13,7 +13,7 @@ namespace WebSellWatch.Models
 
         public int ProductId { get; set; }
         public string ProductName { get; set; } = null!;
-        public string MaSp { get; set; } = null!;
+/*        public string MaSp { get; set; } = null!;*/
         public string? ShortDesc { get; set; }
         public string? Description { get; set; }
         public int? CatId { get; set; }

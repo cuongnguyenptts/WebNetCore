@@ -53,7 +53,7 @@ namespace WebSellWatch.Areas.Admin.Controllers
             {
                 lsProducts = _context.Products.AsNoTracking()
                                   .Include(a => a.Cat)
-                                  .Where(x => x.ProductName.Contains(SearchText) || x.MaSp.Contains(SearchText)
+                                  .Where(x => x.ProductName.Contains(SearchText) || x.MetaDesc.Contains(SearchText)
                                   )
                                   .OrderBy(x => x.ProductId)
                                   .Take(pageSize)
@@ -116,12 +116,11 @@ namespace WebSellWatch.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductId,ProductName,MaSp,ShortDesc,Description,CatId,Price,Discount,Thumb,Video,DateCreated,DateModified,BestSellers,HomeFlag,Active,Tags,Title,Alias,MetaDesc,MetaKey,UnitsInStock")] Product product, Microsoft.AspNetCore.Http.IFormFile fThumb)
+        public async Task<IActionResult> Create([Bind("ProductId,ProductName,ShortDesc,Description,CatId,Price,Discount,Thumb,Video,DateCreated,DateModified,BestSellers,HomeFlag,Active,Tags,Title,Alias,MetaDesc,MetaKey,UnitsInStock")] Product product, Microsoft.AspNetCore.Http.IFormFile fThumb)
         {
             if (ModelState.IsValid)
             {
                 product.ProductName = Utilities.ToTitleCase(product.ProductName);
-                product.MaSp = Utilities.ToTitleCase(product.MaSp);
                 if (fThumb != null)
                 {
                     string extension = Path.GetExtension(fThumb.FileName);
@@ -163,7 +162,7 @@ namespace WebSellWatch.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductId,ProductName,MaSp,ShortDesc,Description,CatId,Price,Discount,Thumb,Video,DateCreated,DateModified,BestSellers,HomeFlag,Active,Tags,Title,Alias,MetaDesc,MetaKey,UnitsInStock")] Product product, Microsoft.AspNetCore.Http.IFormFile fThumb)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductId,ProductName,ShortDesc,Description,CatId,Price,Discount,Thumb,Video,DateCreated,DateModified,BestSellers,HomeFlag,Active,Tags,Title,Alias,MetaDesc,MetaKey,UnitsInStock")] Product product, Microsoft.AspNetCore.Http.IFormFile fThumb)
         {
             if (id != product.ProductId)
             {
@@ -175,7 +174,6 @@ namespace WebSellWatch.Areas.Admin.Controllers
                 try
                 {
                     product.ProductName = Utilities.ToTitleCase(product.ProductName);
-                    product.MaSp = Utilities.ToTitleCase(product.MaSp);
                     if (fThumb != null)
                     {
                         string extension = Path.GetExtension(fThumb.FileName);

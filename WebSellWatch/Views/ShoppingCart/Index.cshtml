@@ -8,14 +8,14 @@
 <!--breadcrumbs area start-->
 <div class="breadcrumbs_area breadcrumbs_other">
     <div class="container">
-        <div class="row">
+        <div class="row" style="margin-top:30px">
             <div class="col-12">
                 <div class="breadcrumb_content text-center">
                     <ul>
                         <li><a href="index.html">home</a></li>
-                        <li><a href="#">pages</a></li>
+                        <li><a href="#">Giỏ hàng</a></li>
                     </ul>
-                    <h3>Shopping Cart</h3>
+                    <h3>Giỏ hàng</h3>
                 </div>
             </div>
         </div>
@@ -36,13 +36,13 @@
                                     <thead>
                                         <tr style="text-align:center">
                                             <th>Sản Phẩm </th>
-                                            <th >Thông tin sản phẩm</th>
+                                            <th>Thông tin sản phẩm</th>
                                             <th>Giá</th>
                                             <th>Số lượng</th>
                                             <th style="width:100px">   Thành tiền  </th>
                                         </tr>
                                     </thead>
-                                    <tbody >
+                                    <tbody>
                                         @if (Model != null && Model.Count() > 0)
                                         {
                                             foreach (var item in Model)
@@ -68,7 +68,7 @@
                                                         </div>
                                                     </td>
                                                     <td style="text-align:center" class="product_quantity">
-                                                        <div  class="cart_product_quantity">
+                                                        <div class="cart_product_quantity">
                                                             <input class="cartItem" min="1" data-mahh="@item.product.ProductId" data-dongia="@item.product.Price" value="@item.amout" type="number">
                                                         </div>
                                                     </td>
@@ -80,7 +80,8 @@
                                                     <td>
                                                         <div class="cart_product_remove text-right">
                                                             <a class="removecart" data-mahh="@item.product.ProductId">
-                                                                <i class="ion-android-close"></i></a>
+                                                                <i class="ion-android-close"></i>
+                                                            </a>
                                                         </div>
                                                     </td>
 
@@ -88,49 +89,48 @@
                                             }
                                         }
                                     </tbody>
-                            </table>
-                        </div>
-                        <div class="cart_page_button border-top d-flex justify-content-between">
-                            <div class="shopping_cart_btn">
-                                <a href="#" class="btn btn-primary border">CLEAR SHOPPING CART</a>
-                                <button class="btn btn-primary border" type="submit">UPDATE YOUR CART</button>
+                                </table>
                             </div>
-                            <div class="shopping_continue_btn">
-                                <button class="btn btn-primary" type="submit">CONTINUE SHOPPING</button>
+                            <div class="cart_page_button border-top d-flex justify-content-between">
+                                <div class="shopping_cart_btn">
+                                    @*                                <a href="#" class="btn btn-primary border">CLEAR SHOPPING CART</a>
+                                <button class="btn btn-primary border" type="submit">UPDATE YOUR CART</button>*@
+                                </div>
+                                <div class="shopping_continue_btn">
+                                    <a class="btn btn-primary" href="shop.html" type="submit">TIẾP TỤC MUA SẮM</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!--coupon code area start-->
-            <div class="cart_page_bottom">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 col-sm-8">
-                        <div class="grand_totall_area">
-                            <div class="grand_totall_inner border-bottom">
-                                <div class="cart_subtotal d-flex justify-content-between">
-                                    <p>Thành tiền </p>
-                                    <span>@Model.Sum(x=>x.TotalMoney).ToString("#,##0") VNĐ</span>
-                                </div>
-                                <div class="cart_grandtotal d-flex justify-content-between">
-                                    <p>Tổng tiền:</p>
+                <!--coupon code area start-->
+                <div class="cart_page_bottom">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-8">
+                            <div class="grand_totall_area">
+                                <div class="grand_totall_inner border-bottom">
+                                    <div class="cart_subtotal d-flex justify-content-between">
+                                        <p>Thành tiền </p>
+                                        <span>@Model.Sum(x=>x.TotalMoney).ToString("#,##0") VNĐ</span>
+                                    </div>
+                                    <div class="cart_grandtotal d-flex justify-content-between">
+                                        <p>Tổng tiền:</p>
                                         <span>@Model.Sum(x=>x.TotalMoney).ToString("#,##0") VND</span>
+                                    </div>
+                                </div>
+                                <div class="proceed_checkout_btn">
+                                    <a class="btn btn-primary" href="checkout.html">Thanh Toán</a>
                                 </div>
                             </div>
-                            <div class="proceed_checkout_btn">
-                                <a class="btn btn-primary" href="#">Thanh Toán</a>
-                            </div>
-                            <a href="#">Checkout with Mutilple Adresses</a>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!--coupon code area end-->
+                <!--coupon code area end-->
             </form>
         }
         else
         {
-           <p> Chưa có đơn trong giỏ hàng</p>
+            <p> Chưa có đơn trong giỏ hàng</p>
         }
     </div>
 </div>
