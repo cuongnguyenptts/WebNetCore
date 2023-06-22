@@ -18,24 +18,10 @@
             "speed": 300,
             "infinite": true
         }'>
-        <div class="single_slider d-flex align-items-center" style="background-image: url('assets\img\banner-2.png');" data-bgimg="assets\img\banner-2.png">
-@*            <iframe allow="autoplay; gyroscope;" allowfullscreen height="100%" referrerpolicy="strict-origin"
-                    src="https://www.kapwing.com/e/645910eb2dacb801634835c8" style="border:0; left:0; overflow:hidden; position:absolute; top:0; width:100%"
-                    title="Embedded content made on Kapwing" ></iframe>*@
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-md-7">
-                        <div class="slider_text">
-                            @*<span>Lookbook</span>
-                            <h1>fashion trend for autum girls with vibes</h1>
-                            <p>We love seeing how our Aslam wearers like <br> to wear their Norda</p>*@
-                            <a style="margin-top: 200px" class="btn btn-primary" href="shop.html">Explore Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="single_slider d-flex align-items-center">
+            <img src="~/assets/img/Watch (1).png" alt="">
         </div>
-     </div>
+    </div>
 </section>
 <!--slider area end-->
 <!--shipping section start-->
@@ -49,8 +35,8 @@
                             <i class="icon-cursor icons"></i>
                         </div>
                         <div class="shipping_text">
-                            <h3>Free Shipping</h3>
-                            <p>Orders over $100</p>
+                            <h3>Giao Hàng Miễn Phí</h3>
+                            <p>Đơn trên 100 nghìn</p>
                         </div>
                     </div>
                     <div class="single_shipping d-flex align-items-center">
@@ -58,8 +44,8 @@
                             <i class="icon-reload icons"></i>
                         </div>
                         <div class="shipping_text">
-                            <h3>Free Returns</h3>
-                            <p>Within 30 days</p>
+                            <h3> Trả Hàng/Đổi Hàng</h3>
+                            <p>Trong 30 ngày</p>
                         </div>
                     </div>
                     <div class="single_shipping d-flex align-items-center">
@@ -67,8 +53,8 @@
                             <i class="icon-lock icons"></i>
                         </div>
                         <div class="shipping_text">
-                            <h3>100% Payment Secure</h3>
-                            <p>Payment Online</p>
+                            <h3>Thanh Toán Online</h3>
+                            @*<p>Payment Online</p>*@
                         </div>
                     </div>
                     <div class="single_shipping d-flex align-items-center">
@@ -76,7 +62,7 @@
                             <i class="icon-tag icons"></i>
                         </div>
                         <div class="shipping_text">
-                            <h3>Affordable Price</h3>
+                            <h3>Mã Giảm Giá</h3>
                             <p>Guaranteed</p>
                         </div>
                     </div>
@@ -90,19 +76,19 @@
 <section class="banner_section mb-109">
     <div class="container">
         <div class="section_title mb-60">
-            <h2>featured collections</h2>
+            <h2>Sản Phẩm Nổi Bật</h2>
         </div>
         <div class="banner_container d-flex">
             <figure class="single_banner position-relative mr-30">
-                <img src="~/assets/img/bg/bg1.jpg" alt="">
+                <img src="~/assets/img/bg/bgr1.png" alt="">
                 <figcaption class="banner_text position-absolute">
-                    <h3>Zara Pattern <br> backpacks</h3>
-                    <p>Stretch, fresh-cool help you alway <br> comfortable</p>
-                    <a class="btn btn-primary" href="shop.html">Shop Now</a>
+                    <h3>Modern Watch <br> backpacks</h3>
+                    <p>Men's Watches With Good Quality <br /> Guaranteed Good</p>
+                    <a class="btn btn-primary" href="shop.html">Mua Ngay</a>
                 </figcaption>
             </figure>
             <figure class="single_banner position-relative">
-                <img src="~/assets/img/bg/bg2.jpg" alt="">
+                <img src="~/assets/img/bg/bgr2.png" alt="">
                 <figcaption class="banner_text position-absolute">
                     <h3 class="text-white">Basic Color Caps</h3>
                     <p class="text-white">Minimalist never cool, choose and make <br> the simple great again!</p>
@@ -117,7 +103,7 @@
     <div class="container">
         <div class="product_header d-flex justify-content-between  mb-50">
             <div class="section_title">
-                <h2>Sản Phẩm nổi bật</h2>
+                <h2>Sản Phẩm</h2>
             </div>
             <div class="product_tab_btn d-flex">
                 <ul class="nav" role="tablist">
@@ -127,17 +113,18 @@
                             All
                         </a>
                     </li>
-                    @foreach (var item in Model.Products){
+                    @foreach (var item in Model.Products)
+                    {
                         <li>
                             <a data-toggle="tab" href="#clothings" role="tab" aria-controls="clothings"
                                aria-selected="false">
-                               @item.category.CatName
+                                @item.category.CatName
                             </a>
                         </li>
                     }
                 </ul>
                 <div class="all_product">
-                    <a href="shop.html">All Product</a>
+                    <a href="shop.html">Tất Cả Sản Phẩm</a>
                 </div>
             </div>
         </div>
@@ -158,10 +145,10 @@
                               {"breakpoint":300, "settings": { "slidesToShow": 1 } }
                              ]
                         }'>
-                    @foreach (var item in Model.Products)
-                    {
-                            @await Html.PartialAsync("_ListProductPartialView", item.lsProducts)                       
-                    }
+                        @foreach (var item in Model.Products)
+                        {
+                            @await Html.PartialAsync("_ListProductPartialView", item.lsProducts)
+                        }
 
                     </div>
                 </div>
@@ -176,24 +163,24 @@
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <figure class="single_banner position-relative">
-                    <img src="~/assets/img/bg/bg3.jpg" alt="">
+                    <img src="~/assets/img/bg/bgr3.png" alt="">
                     <div class="banner_text position-absolute">
-                        <h3>Minimalist <br> sneaker</h3>
-                        <p>Stretch, fresh-cool help you alway <br> comfortable</p>
-                        <a class="btn btn-primary" href="shop.html">Shop Now</a>
+                        <h3>luxury watch</h3>
+                        <p>change for life on time</p>
+                        <a class="btn btn-primary" href="shop.html">Mua Ngay</a>
                     </div>
                     <div class="banner_tag">
-                        <span>new arrivals <br> women</span>
+                        <span>new arrival</span>
                     </div>
                 </figure>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <figure class="single_banner position-relative">
-                    <img src="~/assets/img/bg/bg4.jpg" alt="">
+                    <img src="~/assets/img/bg/bgr4.png" alt="">
                     <div class="banner_text position-absolute text__style2">
-                        <h3><span>50%</span> OFF <br> for Autumn</h3>
-                        <p>Stretch, fresh-cool help you alway <br> comfortable</p>
-                        <a class="btn btn-primary" href="shop.html">Shop Now</a>
+                        <h3><span>35%</span> OFF <br> Discount up to</h3>
+                        <p>Minimalist Watch <br> Get the Promo</p>
+                        <a class="btn btn-primary" href="shop.html">Mua Ngay</a>
                     </div>
                     <div class="banner_tag">
                         <span>mega sale</span>
@@ -209,7 +196,7 @@
     <div class="container">
         <div class="product_header d-flex justify-content-between  mb-60">
             <div class="section_title">
-                <h2>new arrivals</h2>
+                <h2>Sản Phẩm Mới</h2>
             </div>
             <div class="product_tab_btn d-flex">
                 <ul class="nav" role="tablist">
@@ -231,7 +218,7 @@
                 </ul>
                 </ul>
                 <div class="all_product">
-                    <a href="shop.html">All Product</a>
+                    <a href="shop.html">Tất Cả Sản Phẩm</a>
                 </div>
             </div>
         </div>
@@ -257,6 +244,8 @@
                             @await Html.PartialAsync("_ListProductPartialView", allProduct)
                         }
 
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -266,68 +255,95 @@
 @if (Model.TinTucs != null && Model.TinTucs.Count() > 0)
 {
     <section class="blog_section mb-140">
-    <div class="container">
-        <div class="product_header border-top d-flex justify-content-between  mb-60">
-            <div class="section_title">
-                <h2>press & look</h2>
+        <div class="container">
+            <div class="product_header border-top d-flex justify-content-between  mb-60">
+                <div class="section_title">
+                    <h2>Tin Tức Mới</h2>
+                </div>
+                <div class="all_articles">
+                    <a href="blog.html">Tất Cả</a>
+                </div>
             </div>
-            <div class="all_articles">
-                <a href="blog.html">All articles</a>
-            </div>
-        </div>
-        <div class="blog_container row">
-            <div class="blog_slick slick_slider_activation" data-slick='{
-                        "slidesToShow": 3,
-                        "slidesToScroll": 1,
-                        "arrows": false,
-                        "dots": false,
-                        "autoplay": false,
-                        "speed": 300,
-                        "infinite": true,
-                        "responsive":[
-                          {"breakpoint":992, "settings": { "slidesToShow": 2 } },
-                          {"breakpoint":768, "settings": { "slidesToShow": 2 } },
-                          {"breakpoint":576, "settings": { "slidesToShow": 1 } }
-                        ]
-                    }'>
+            <div class="blog_container row">
+                <div class="blog_slick slick_slider_activation" data-slick='{
+                            "slidesToShow": 3,
+                            "slidesToScroll": 1,
+                            "arrows": false,
+                            "dots": false,
+                            "autoplay": false,
+                            "speed": 300,
+                            "infinite": true,
+                            "responsive":[
+                              {"breakpoint":992, "settings": { "slidesToShow": 2 } },
+                              {"breakpoint":768, "settings": { "slidesToShow": 2 } },
+                              {"breakpoint":576, "settings": { "slidesToShow": 1 } }
+                            ]
+                        }'>
                     @foreach (var item in Model.TinTucs)
                     {
                         string url = $"/tin-tuc/{item.Alias}-{item.PostId}.html";
                         <article class="col single_blog">
-                           <figure>
-                               <div class="blog_thumb">
-                                   <a href="blog-details.html"><img style="height:249px" src="~/images/news/@item.Thumb" alt="@item.Title"></a>
-                               </div>
-                               <figcaption class="blog_content">
-                                  <div class="blog_meta">
-                                     <ul class="d-flex">
-                                        <li><span class="meta_tag">News</span></li>
+                            <figure>
+                                <div class="blog_thumb">
+                                    <a href="@url"><img style="height:249px" src="~/images/news/@item.Thumb" alt="@item.Title"></a>
+                                </div>
+                                <figcaption class="blog_content">
+                                    <div class="blog_meta">
+                                        <ul class="d-flex">
+                                            <li><span class="meta_tag">News</span></li>
                                             <li><span>@item.CreatedDate.Value.ToShortDateString()</span></li>
-                                     </ul>
-                                     </div>
-                                      <h3>
-                                         <a href="blog-details.html">
-                                             @item.Scontents
-                                          </a>
-                                        </h3>
-                                    </figcaption>
-                           </figure>
+                                        </ul>
+                                    </div>
+                                    <h3>
+                                        <a href="@url">
+                                            @item.Title
+                                        </a>
+                                    </h3>
+                                </figcaption>
+                            </figure>
                         </article>
                     }
-                 </div>
-             </div>
+                </div>
             </div>
-        </section>
+        </div>
+    </section>
 }
-
+<section class="newsletter_section newsletter_padding border-top">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="newsletter_inner d-flex justify-content-between align-items-center">
+                    <div class="newsletter_text">
+                        <h3>Đăng kí ngay</h3>
+                        <p>Nhận tin tức mới nhất bản tin của chúng tôi</p>
+                    </div>
+                    <div class="newsletter_subscribe">
+                        <form id="mc-form">
+                            <input class="border-0" id="mc-email" type="email" autocomplete="off" placeholder="Enter your email address">
+                            <i class="icon-envelope-open icons"></i>
+                            <button class="border-0" id="mc-submit">Đăng Kí</button>
+                        </form>
+                        <!-- mailchimp-alerts Start -->
+                        <div class="mailchimp-alerts text-centre">
+                            <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
+                            <div class="mailchimp-success"></div><!-- mailchimp-success end -->
+                            <div class="mailchimp-error"></div><!-- mailchimp-error end -->
+                        </div><!-- mailchimp-alerts end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--newsletter section end-->
 <!-- blog section end -->
 <!-- instagram section start -->
-<section class="instagram_section mb-135">
+@*<section class="instagram_section mb-135">
     <div class="container-fluid p-0">
         <div class="section_title text-center mb-130">
             <h2>follow our instagram</h2>
         </div>
         <div id="instagramFeed"></div>
     </div>
-</section>
+</section>*@
 <!-- instagram section end -->

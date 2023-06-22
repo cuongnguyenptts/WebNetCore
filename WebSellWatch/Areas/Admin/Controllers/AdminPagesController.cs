@@ -24,7 +24,7 @@ namespace WebSellWatch.Areas.Admin.Controllers
         }
 
         // GET: Admin/AdminPages
-        public IActionResult Index(int? page)
+        public IActionResult Index(int page = 1)
         {
             var collection = _context.Pages.AsNoTracking().ToList();
             foreach (var item in collection)
@@ -36,10 +36,11 @@ namespace WebSellWatch.Areas.Admin.Controllers
                     _context.SaveChanges();
                 }
             }
-            var pageNumber = page == null || page <= 0 ? 1 : page.Value;
-            var pageSize = 20;
+            var pageNumber = page;
+            var pageSize = 10;
             var lsPages = _context.Pages
                 .AsNoTracking()
+                .Take(pageSize)
                 .OrderBy(x => x.PageId);
             PagedList<Page> models = new PagedList<Page>(lsPages, pageNumber, pageSize);
 
@@ -93,7 +94,7 @@ namespace WebSellWatch.Areas.Admin.Controllers
                 _context.Add(page);
                 _notyfService.Success("Thêm mới thành công");
                 await _context.SaveChangesAsync();
-      
+
                 return RedirectToAction(nameof(Index));
             }
             return View(page);
@@ -186,7 +187,7 @@ namespace WebSellWatch.Areas.Admin.Controllers
             _context.Pages.Remove(page);
             _notyfService.Success("Xóa thành công");
             await _context.SaveChangesAsync();
-   
+
             return RedirectToAction(nameof(Index));
         }
 

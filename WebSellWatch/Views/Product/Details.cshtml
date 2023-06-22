@@ -12,7 +12,7 @@
             <div class="col-12">
                 <div class="breadcrumb_content">
                     <ul>
-                        <li><a href="index.html">home</a></li>
+                        <li><a href="index.html">Trang Chủ</a></li>
                         <li><a href="shop.html">shop</a></li>
                         <li>@Model.Title</li>
                     </ul>
@@ -34,7 +34,7 @@
                             <a class="zoom_tabimg_list" href="javascript:void(0)"><img src="~/images/products/@Model.Thumb" alt="tab-thumb"></a>
                             <a class="zoom_tabimg_list" href="javascript:void(0)"><img src="~/images/products/@Model.Thumb" alt="tab-thumb"></a>
                             <a class="zoom_tabimg_list" href="javascript:void(0)"><img src="~/images/products/@Model.Thumb" alt="tab-thumb"></a>
-                             <a class="zoom_tabimg_list" href="javascript:void(0)"><img src="~/images/products/@Model.Thumb" alt="tab-thumb"></a>
+                            <a class="zoom_tabimg_list" href="javascript:void(0)"><img src="~/images/products/@Model.Thumb" alt="tab-thumb"></a>
                         </div>
                         <div class="product_zoom_main_img">
                             <div class="product_zoom_thumb">
@@ -78,7 +78,7 @@
                             </div>
                             <div class="product_review">
                                 <ul class="d-flex">
-                                    <li>4 reviews</li>
+                                    <li>4 Đánh Giá</li>
                                 </ul>
                             </div>
                         </div>
@@ -88,20 +88,20 @@
                         <div class="product_availalbe">
                             <ul class="d-flex">
                                 <li>
-                                    Availalbe:                                     
+                                    Trong Kho:
                                     <span class="stock">
                                         @if (Model.UnitsInStock.Value > 0)
                                         {
                                             <div class="d-flex align-items-center" style="text-align:center">
                                                 <div class="badge badge-success badge-dot m-r-10"></div>
-                                                <div>In Stock</div>
+                                                <div>Còn Hàng</div>
                                             </div>
                                         }
                                         else
                                         {
                                             <div class="d-flex align-items-center">
                                                 <div class="badge badge-danger badge-dot m-r-10"></div>
-                                                <div>Out Stock</div>
+                                                <div>Hết Hàng</div>
                                             </div>
                                         }
                                     </span>
@@ -113,7 +113,7 @@
                         </div>
                         <div class="product_variant">
                             <div class="filter__list widget_color d-flex align-items-center">
-                                <h3>select color</h3>
+                                <h3>Màu</h3>
                                 <ul>
                                     <li>
                                         <input type="checkbox">
@@ -133,41 +133,20 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="filter__list widget_size d-flex align-items-center">
-                                <h3>select size</h3>
-                                <ul>
-                                    <li>
-                                        <a href="javascript:void(0)">S </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0)"> M</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0)">L</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0)"> XL</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0)">XLL</a>
-                                    </li>
-                                </ul>
-                            </div>
 
                             <div class="variant_quantity_btn d-flex">
                                 <div class="pro-qty border">
                                     <input id="txtsoLuong" name="txtsoLuong" class="cart-plus-minus-box" value="1" type="text">
                                 </div>
                                 <li class="add-to-cart">
-                                    <button class="button btn btn-primary" type="submit"><i class="ion-android-add"></i> Add To Cart</button>
+                                    <button class="button btn btn-primary" type="submit"><i class="ion-android-add"></i> Thêm vào giỏ hàng</button>
                                     <input hidden asp-for="ProductId" />
-                                    <a class="wishlist" href="#"><i class="ion-ios-heart"></i></a>
                                 </li>
                             </div>
                         </div>
-                        <div class="product_sku">
-                            <p><span>SKU: </span> #ABC123456</p>
-                        </div>
+                        @*                        <div class="product_sku">
+                        <p><span>Mã Hàng: </span> #ABC123456</p>
+                        </div>*@
                         <div class="product_tags d-flex">
                             <span>tags: </span>
                             <ul class="d-flex">
@@ -208,7 +187,7 @@
                                 <a data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Bình luận</a>
                             </li>
                             <li>
-                                <a data-toggle="tab" href="#video" role="tab" aria-controls="video" aria-selected="false">Custom Tab Video </a>
+                                <a data-toggle="tab" href="#video" role="tab" aria-controls="video" aria-selected="false">Video Sản Phầm </a>
                             </li>
 
                         </ul>
@@ -221,7 +200,7 @@
                         </div>
                         <div class="tab-pane fade" id="reviews" role="tabpanel">
                             <div class="reviews_wrapper">
-                                <h2>1 review for Donec eu furniture</h2>
+                                <h2>Đánh Giá Sản Phẩm</h2>
                                 <div class="reviews_comment_box">
                                     <div class="comment_thmb">
                                         <img src="~/assets/img/blog/comment2.jpg" alt="">
@@ -237,43 +216,60 @@
                                                     <li><a href="#"><i class="icon-star"></i></a></li>
                                                 </ul>
                                             </div>
-                                            <p><strong>admin </strong>- September 12, 2018</p>
-                                            <span>roadthemes</span>
+                                            <p><strong>Cường </strong>- September 12, 2022</p>
+                                            <span>Good</span>
                                         </div>
                                     </div>
 
                                 </div>
-                                <div class="comment_title">
-                                    <h2>Add a review </h2>
-                                    <p>Your email address will not be published.  Required fields are marked </p>
-                                </div>
-                                <div class="product_ratting mb-10">
-                                    <h3>Your rating</h3>
-                                    <ul class="d-flex">
-                                        <li><a href="#"><i class="icon-star"></i></a></li>
-                                        <li><a href="#"><i class="icon-star"></i></a></li>
-                                        <li><a href="#"><i class="icon-star"></i></a></li>
-                                        <li><a href="#"><i class="icon-star"></i></a></li>
-                                        <li><a href="#"><i class="icon-star"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product_review_form">
-                                    <form action="#">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <label for="review_comment">Your review </label>
-                                                <textarea name="comment" id="review_comment"></textarea>
+                                <div class="reviews_comment_box">
+                                    <div class="comment_thmb">
+                                        <img src="~/assets/img/blog/comment2.jpg" alt="">
+                                    </div>
+                                    <div class="comment_text">
+                                        <div class="reviews_meta">
+                                            <div class="star_rating">
+                                                <ul class="d-flex">
+                                                    <li><a href="#"><i class="icon-star"></i></a></li>
+                                                    <li><a href="#"><i class="icon-star"></i></a></li>
+                                                    <li><a href="#"><i class="icon-star"></i></a></li>
+                                                    <li><a href="#"><i class="icon-star"></i></a></li>
+                                                    <li><a href="#"><i class="icon-star"></i></a></li>
+                                                </ul>
                                             </div>
+                                            <p><strong>Cường </strong>- September 12, 2022</p>
+                                            <span>Good</span>
                                         </div>
-                                        <button type="submit">Gửi</button>
-                                    </form>
+                                    </div>
+
                                 </div>
+                                @*                                <div class="product_ratting mb-10">
+                                <h3>Đánh Giá Của Bạn</h3>
+                                <ul class="d-flex">
+                                <li><a href="#"><i class="ion-ios-star"></i></a></li>
+                                <li><a href="#"><i class="ion-ios-star"></i></a></li>
+                                <li><a href="#"><i class="ion-ios-star"></i></a></li>
+                                <li><a href="#"><i class="ion-ios-star"></i></a></li>
+                                <li><a href="#"><i class="ion-ios-star"></i></a></li>
+                                </ul>
+                                </div>*@
+                                @*                                <div class="product_review_form">
+                                <form action="#">
+                                <div class="row">
+                                <div class="col-12">
+                                <label for="review_comment"> </label>
+                                <textarea name="comment" id="review_comment"></textarea>
+                                </div>
+                                </div>
+                                <button type="submit">Gửi</button>
+                                </form>
+                                </div>*@
                             </div>
                         </div>
-@*                        <div class="tab-pane fade" id="tags" role="tabpanel">
-                            <div class="product_info_content">
-                                <p>@Html.Raw(Model.Description)</p>
-                            </div>
+                        @*                        <div class="tab-pane fade" id="tags" role="tabpanel">
+                        <div class="product_info_content">
+                        <p>@Html.Raw(Model.Description)</p>
+                        </div>
                         </div>*@
                         <div class="tab-pane fade" id="video" role="tabpanel">
                             <div class="product_tab_vidio text-center">
@@ -294,7 +290,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="section_title mb-50">
-                    <h2>Sản phẩm tương tư</h2>
+                    <h2>Sản phẩm tương tự</h2>
                 </div>
             </div>
         </div>
@@ -317,7 +313,7 @@
                 {
                     foreach (var item in lsProduct)
                     {
-                        string url = $"";
+                        string url = $"/{item.Alias}-{item.ProductId}.html";
                         <div class="col-lg-3">
                             <article class="single_product">
                                 <figure>
@@ -360,9 +356,9 @@
                                             }
 
                                         </div>
-                                        <div class="add_to_cart">
-                                            <a class="btn btn-primary" href="#" data-tippy="Add To Cart" data-tippy-inertia="true" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-placement="top">Add To Cart</a>
-                                        </div>
+                                        @*                                        <div class="add_to_cart">
+                                <a class="btn btn-primary" href="#" data-tippy="Add To Cart" data-tippy-inertia="true" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-placement="top">Mua Ngay</a>
+                                </div*@>
                                     </figcaption>
                                 </figure>
                             </article>
@@ -424,7 +420,7 @@
                 }
                 });
                 });*@
-                });
+                        });
             function loadHeaderCart() {
                 $('#miniCart').load("/AjaxContent/HeaderCart");
                 $('#numberCart').load("/AjaxContent/NumberCart");

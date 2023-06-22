@@ -40,17 +40,17 @@
                             </tr>
                             <tr>
                                 <td>Giá:</td>
-                                <td>@Model.MetaKey</td>
+                                <td>@Model.Thumb</td>
                             </tr>
                             <tr>
                                 <td>Discount:</td>
                                 <td>@Model.Contents</td>
                             </tr>
-                            </tbody>
-                            </table>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="m-b-15">
+                    <a class="btn btn-primary" asp-area="Admin" asp-controller="AdminPages" asp-action="Edit" asp-route-id="@Model.PageId">Edit</a>
+                </div>
+            </div>
         </div>
-        <div class="m-b-15">
-            <a class="btn btn-primary" asp-area="Admin" asp-controller="AdminPages" asp-action="Edit" asp-route-id="@Model.PageId">Edit</a>
-        </div>
-    </div>
-</div>

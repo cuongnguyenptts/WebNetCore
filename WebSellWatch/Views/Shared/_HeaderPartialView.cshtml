@@ -1,4 +1,5 @@
-﻿<header class="header_section header_transparent">
+﻿
+<header class="header_section header_transparent">
     <div class="header_top">
         <div class="container-fluid">
             <div class="row">
@@ -7,10 +8,10 @@
                         <div class="header_contact_info">
                             <ul class="d-flex">
                                 <li class="text-white">
-                                    <i class="icons icon-phone"></i> <a href="tel:+05483716566">+054 8371 65 66</a>
+                                    <i class="icons icon-phone"></i> <a href="tel:++0988 497 1696">+0988 497 169</a>
                                 </li>
                                 <li class="text-white">
-                                    <i class="icon-envelope-letter icons"></i> <a href="#">uthrstore@domain.com</a>
+                                    <i class="icon-envelope-letter icons"></i> <a href="#">cuongnguyenptts@gmail.com</a>
                                 </li>
                             </ul>
                         </div>
@@ -37,10 +38,10 @@
                                 <ul class="d-flex">
                                     <li class="language">
                                         <a href="#">
-                                            Eng <i class="icon-right ion-ios-arrow-down"></i>
+                                            Vie <i class="icon-right ion-ios-arrow-down"></i>
                                         </a>
                                         <ul class="dropdown_language">
-                                            <li><a href="#">Vie</a></li>
+                                            <li><a href="#">ENG</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -61,17 +62,17 @@
                             <a href="javascript:void(0)"><i class="ion-navicon"></i></a>
                         </div>
                         <div class="header_logo">
-                            <a class="sticky_none" href="index.html"><img src="~/assets/img/logo/logo.png" alt=""></a>
+                            <a class="sticky_none" href="index.html"><img src="~/assets/img/logo/logodd.png" alt=""></a>
                         </div>
                         <!--main menu start-->
                         <div class="main_menu d-none d-lg-block">
                             <nav>
                                 <ul class="d-flex">
-                                    <li><a asp-controller="Home" asp-action="Index">Home</a> </li>
+                                    <li><a asp-controller="Home" asp-action="Index">Trang Chủ</a> </li>
                                     <li><a asp-controller="Product" asp-action="Index">Shop</a></li>
-                                    <li> <a href="/page/huong-dan-mua-hang">Hướng dẫn mua hàng</a></li>
+                                    <li> <a asp-controller="Page" asp-action="Details">Hướng dẫn mua hàng</a></li>
                                     <li>
-                                        <a asp-controller="Blog" asp-action="Index">Blog</a>
+                                        <a asp-controller="Blog" asp-action="Index">Tin Tức</a>
                                     </li>
                                     <li><a asp-controller="Home" asp-action="Contact">Liên Hệ</a></li>
                                 </ul>
@@ -80,29 +81,34 @@
                         <div class="header_account">
                             <ul class="d-flex">
                                 <li class="header_search"><a href="#"><i class="icon-magnifier icons"></i></a></li>
-                                <li class="account_link">
-                                    <a href="#"><i class="icon-user icons"></i></a>
-                                    <ul class="dropdown_account_link">
-                                    @if (!User.Identity.IsAuthenticated)
-                                    {
-                                            <li><a href="/dang-nhap.html">Đăng Nhập</a></li>
-                                            <li><a href="/dang-ky.html">Đăng Kí</a></li>
-
-                                    }else{
-                                            <li><a href="/tai-khoan-cua-toi.html">Tài khoản của tôi</a></li>
-                                            <li><a href="dang-xuat.html">Đăng xuất</a></li>
-
-                                    }
-                                    </ul>
-                                </li>
-@*                                <li>
-                                    <a href="#"><i class="icon-heart icons"></i></a> <span class="item_count">2</span>
-                                </li>*@
                                 <li class="shopping_cart">
                                     <a href="#"><i class="icon-basket-loaded icons"></i></a>
                                     @await Component.InvokeAsync("NumberCart")
-                                    
+
                                 </li>
+                                <li class="account_link">
+
+                                    <a href="#"><i class="icon-user icons"></i></a>
+                                    <ul class="dropdown_account_link">
+
+                                        @if (!User.Identity.IsAuthenticated)
+                                        {
+                                            <li><a href="/dang-nhap.html">Đăng Nhập</a></li>
+                                            <li><a href="/dang-ky.html">Đăng Kí</a></li>
+
+                                        }
+                                        else
+                                        {
+                                            <li><a href="/tai-khoan-cua-toi.html">Tài khoản của tôi</a></li>
+                                            <li><a href="dang-xuat.html">Đăng xuất</a></li>
+
+                                        }
+                                    </ul>
+                                </li>
+                                @*                                <li>
+                                <a href="#"><i class="icon-heart icons"></i></a> <span class="item_count">2</span>
+                                </li>*@
+
                             </ul>
                         </div>
                     </div>

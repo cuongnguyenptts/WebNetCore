@@ -1,4 +1,6 @@
-﻿@model IEnumerable<WebSellWatch.Models.Page>
+﻿@using PagedList.Core.Mvc
+@model PagedList.Core.IPagedList<WebSellWatch.Models.Page>
+
 
 @{
     ViewData["Title"] = "Index";
@@ -74,11 +76,11 @@
 
                 </tbody>
             </table>
-@*            <div aria-label="Page navigation example">
+            <div aria-label="Page navigation example">
                 <ul class="pagination">
-                    <pager class="pager-container" list="@Model" asp-area="Admin" asp-controller="AdminPages" asp-action="Index" />
+                    <pager class="pager-container" list="@Model" asp-area="Admin" asp-controller="AdminPages" asp-action="Index"></pager>
                 </ul>
-            </div>*@
+            </div>
         </div>
     </div>
 </div>

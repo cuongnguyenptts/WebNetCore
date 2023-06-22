@@ -6,7 +6,7 @@
                     <span class="icon-holder">
                         <i class="anticon anticon-dashboard"></i>
                     </span>
-                    <span class="title">Dashboard</span>
+                    <span class="title">dashboard</span>
                     <span class="arrow">
                         <i class="arrow-icon"></i>
                     </span>
@@ -52,14 +52,12 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="form-elements.html">Form Elements</a>
+                        <a asp-area="Admin" asp-controller="Home" asp-action="Index">Tổng doanh số</a>
                     </li>
                     <li>
-                        <a href="form-layouts.html">Form Layouts</a>
+                        <a href="form-layouts.html">Mua Hàng</a>
                     </li>
-                    <li>
-                        <a href="form-validation.html">Form Validation</a>
-                    </li>
+
                 </ul>
             </li>
             <li class="nav-item dropdown">
@@ -82,9 +80,6 @@
                     <li>
                         <a asp-action="Index" asp-controller="AdminRoles" asp-area="Admin">Quản lý quyền truy cập</a>
                     </li>
-                    <li>
-                        <a href="data-table.html">Quản lý Tỉnh/Thành</a>
-                    </li>
 
                 </ul>
             </li>
@@ -104,43 +99,15 @@
                     <span class="title">Quản lý Pages</span>
                 </a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="dropdown-toggle" href="javascript:void(0);">
-                    <span class="icon-holder">
-                        <i class="anticon anticon-lock"></i>
-                    </span>
-                    <span class="title">Quản lý Shipper</span>
-                    <span class="arrow">
-                        <i class="arrow-icon"></i>
-                    </span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a href="login-1.html">Login 1</a>
-                    </li>
-                    <li>
-                        <a href="login-2.html">Login 2</a>
-                    </li>
-                    <li>
-                        <a href="login-3.html">Login 3</a>
-                    </li>
-                    <li>
-                        <a href="sign-up-1.html">Sign Up 1</a>
-                    </li>
-                    <li>
-                        <a href="sign-up-2.html">Sign Up 2</a>
-                    </li>
-                    <li>
-                        <a href="sign-up-3.html">Sign Up 3</a>
-                    </li>
-                    <li>
-                        <a href="error-1.html">Error 1</a>
-                    </li>
-                    <li>
-                        <a href="error-2.html">Error 2</a>
-                    </li>
-                </ul>
-            </li>
+            @*            <li class="nav-item">
+            <a asp-area="Admin" asp-controller="" asp-action="Index">
+            <span class="icon-holder">
+            <i class="anticon anticon-lock"></i>
+            </span>
+            <span class="title">Quản lý Shipper</span>
+            </a>
+            </li>*@
         </ul>
+
     </div>
 </div>

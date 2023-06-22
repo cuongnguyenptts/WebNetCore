@@ -22,16 +22,26 @@ namespace WebSellWatch.Areas.Admin.Controllers
         }
 
         // GET: Admin/AdminCustomers
-        public async Task<IActionResult> Index(int? page)
+        public IActionResult Index(int? page, string searchtext = "")
         {
             var pageNumber = page == null || page <= 0 ? 1 : page.Value;
             var pageSize = 20;
             var IsCustomers = _context.Customers.AsNoTracking().
                 Include(c => c.Location).
+                Where(x => x.Phone.Contains(searchtext) || x.FullName.Contains(searchtext)).
                 OrderByDescending(x => x.CreateDate);
             PagedList<Customer> Models = new PagedList<Customer>(IsCustomers, pageNumber, pageSize);
             ViewBag.CurrentPage = pageNumber;
             return View(Models);
+        }
+        public IActionResult Filtter(int CustomerId = 0)
+        {
+            var url = $"/Admin/AdminCustomers?CustomerId={CustomerId}";
+            if (CustomerId == 0)
+            {
+                url = $"/Admin/AdminCustomers";
+            }
+            return Json(new { status = "success", redirectUrl = url });
         }
 
         // GET: Admin/AdminCustomers/Details/5
@@ -163,14 +173,14 @@ namespace WebSellWatch.Areas.Admin.Controllers
             {
                 _context.Customers.Remove(customer);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CustomerExists(int id)
         {
-          return (_context.Customers?.Any(e => e.CustomerId == id)).GetValueOrDefault();
+            return (_context.Customers?.Any(e => e.CustomerId == id)).GetValueOrDefault();
         }
     }
 }

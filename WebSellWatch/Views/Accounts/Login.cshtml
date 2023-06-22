@@ -4,32 +4,61 @@
     ViewData["Title"] = "Đăng nhập";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section Styles{
+    <link rel="shortcut icon" href="~/assets/img/logo/Thiết kế chưa có tên.png">
+    <link href="~/adminassets/css/app.min.css" rel="stylesheet">
+}
 
-<div class="blog_details" style="margin-top: 170px">
-    <div class="blog_comment_form">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="comments_form">
-                        <h3 style="text-align:center"> Đăng Nhập </h3>
-                        <form asp-action="Login" method="post" style="text-align:center">
-                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                <div class="col-md-12">
-                                
-                                    <input type="email" asp-for="UserName" placeholder="Địa chỉ Email">
+<div class="d-flex full-height p-v-15 flex-column justify-content-between" style="background-color:#f2f3ed">
+    <div class="container" style="margin-top: 250px;">
+        <div class="row align-items-center">
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="m-t-20" style="text-align:center">Đăng nhập</h2>
+                        <form asp-action="Login" method="post">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label class="font-weight-semibold" for="userName">Email:</label>
+                                <div class="input-affix">
+                                    <i class="prefix-icon anticon anticon-user"></i>
+                                    <input type="email" class="form-control" asp-for="UserName" placeholder="Địa chỉ Email">
                                     <span asp-validation-for="UserName" class="text-danger"></span>
                                 </div>
-                                <div class="col-md-12">
-                                    <input type="password" asp-for="Password" placeholder="Mật khẩu">
+                            </div>
+                            <div class="form-group">
+                                <label class="font-weight-semibold" for="password">Mật khẩu:</label>
+                                <div class="input-affix m-b-10">
+                                    <i class="prefix-icon anticon anticon-lock"></i>
+                                    @*  <input type="password" class="form-control" id="password" placeholder="Password">*@
+                                    <input type="password" class="form-control" asp-for="Password" placeholder="Mật khẩu">
                                     <span asp-validation-for="Password" class="text-danger"></span>
                                 </div>
-                       
-                            <button style="margin-bottom:100px" class="btn btn-primary" type="submit">Đăng nhập</button>
+                            </div>
+                            <div class="form-group">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <span class="font-size-13 text-muted">
+                                        Bạn chưa có tài khoản?
+                                        <a class="small" href="dang-ky.html"> Đăng kí</a>
+                                    </span>
+                                    <button class="btn btn-primary" type="s">Đăng nhập</button>
+                                </div>
+                            </div>
                         </form>
-                        </>
                     </div>
                 </div>
+            </div>
+            <div class="offset-md-1 col-md-6 d-none d-md-block">
+                <img class="img-fluid" src="~/adminassets/images/Watch.png" alt="">
             </div>
         </div>
     </div>
 </div>
+@section Scripts{
+    <!-- Core Vendors JS -->
+    <script src="~/adminassets/js/vendors.min.js"></script>
+
+    <!-- page js -->
+    <!-- Core JS -->
+    <script src="~/adminassets/js/app.min.js"></script>
+}

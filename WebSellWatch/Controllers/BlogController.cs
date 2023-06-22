@@ -41,9 +41,9 @@ namespace WebSellWatch.Controllers
         }
 
         [Route("/tintuc/{Alias}-{id}.html", Name = "TinDeltails")]
-        public  IActionResult Details(int id)
+        public IActionResult Details(int id)
         {
-            var tinDang =  _context.TinDangs.AsNoTracking()
+            var tinDang = _context.TinDangs.AsNoTracking()
                 .SingleOrDefault(m => m.PostId == id);
             if (tinDang == null)
             {

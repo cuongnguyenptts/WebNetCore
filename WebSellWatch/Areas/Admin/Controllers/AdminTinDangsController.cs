@@ -42,9 +42,11 @@ namespace WebSellWatch.Areas.Admin.Controllers
             var pageNumber = page == null || page <= 0 ? 1 : page.Value;
             var pageSize = 10;
             var lsTinDangs = _context.TinDangs
+                .Skip(pageNumber)
                 .AsNoTracking()
+                .Take(pageSize)
                 .OrderBy(x => x.PostId);
-            PagedList<TinDang> models = new PagedList<TinDang>(lsTinDangs, pageNumber, pageSize);
+            PagedList<TinDang> models = new PagedList<TinDang>(lsTinDangs.AsQueryable(), pageNumber, pageSize);
 
             ViewBag.CurrentPage = pageNumber;
             return View(models);
@@ -197,5 +199,5 @@ namespace WebSellWatch.Areas.Admin.Controllers
         {
             return _context.TinDangs.Any(e => e.PostId == id);
         }
-    }  
+    }
 }
